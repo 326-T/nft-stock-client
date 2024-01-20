@@ -1,9 +1,11 @@
 import Image from 'next/image'
-import { Pokemon } from '@/types/Pokemon'
+import Link from 'next/link'
+import { Pokemon } from '@/types/pokemon'
 
 export default function ItemCard({ pokemon }: { pokemon: Pokemon }) {
   return (
-    <div
+    <Link
+      href={`/items/${pokemon.id}`}
       className='
         block
         w-full
@@ -16,6 +18,6 @@ export default function ItemCard({ pokemon }: { pokemon: Pokemon }) {
         <p>高さ: {pokemon.height}</p>
         <p>重さ: {pokemon.weight}</p>
       </div>
-    </div>
+    </Link>
   )
 }

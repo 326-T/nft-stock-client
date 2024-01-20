@@ -1,4 +1,4 @@
-import { Pokemon } from '@/types/Pokemon'
+import { Pokemon } from '@/types/pokemon'
 import ItemCard from './ItemCard'
 
 export default function ItemContainer({ pokemons }: { pokemons: Pokemon[] }) {
