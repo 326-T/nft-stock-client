@@ -8,6 +8,7 @@ export default function AppHeader({}: {}) {
       className="
         flex w-full p-2 md:px-10
         items-center justify-between
+        bg-white border-b border-gray-200
       "
     >
       <div

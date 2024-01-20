@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { LoadingProvider } from "./contexts/LoadingProvider";
+import { AxiosProvider } from "./contexts/AxiosProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="jp">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <LoadingProvider>
+          <AxiosProvider>{children}</AxiosProvider>
+        </LoadingProvider>
+      </body>
     </html>
   );
 }

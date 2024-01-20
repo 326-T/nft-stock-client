@@ -13,7 +13,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <ClientOnly>
           <div className="sticky top-0">
             <AppHeader />
-            <div className="divider m-0" />
           </div>
           {children}
         </ClientOnly>
