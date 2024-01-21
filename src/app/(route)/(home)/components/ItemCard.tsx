@@ -12,7 +12,7 @@ export default function ItemCard({ pokemon }: { pokemon: Pokemon }) {
       '
     >
       <Image src={pokemon.sprites.front_default} alt={pokemon.name} width={400} height={400} />
-      <div className='block'>
+      <div className='block body-large'>
         <p>図鑑番号: {pokemon.id}</p>
         <p>名前: {pokemon.name}</p>
         <p>高さ: {pokemon.height}</p>

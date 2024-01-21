@@ -12,7 +12,7 @@ export function AxiosProvider({ children }: { children: React.ReactNode }) {
   const setUpAxios = async () => {
     const frontClient: AxiosInstance = axios.create()
     frontClient
-      .get('api/axios')
+      .get('/api/axios')
       .then((res) => {
         axios.interceptors.request.clear()
         axios.interceptors.response.clear()

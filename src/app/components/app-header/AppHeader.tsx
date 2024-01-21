@@ -18,7 +18,7 @@ export default function AppHeader({}: {}) {
         '
       >
         <GiChargingBull className='icon-large' />
-        <h1 className='title-large'>NFT Stock</h1>
+        <h1 className='title-large hidden md:block'>NFT Stock</h1>
       </div>
       <Menu />
       <UserIcon />

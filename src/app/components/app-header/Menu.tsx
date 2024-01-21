@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Menu() {
   return (
-    <div className='flex items-centor¥'>
+    <div className='flex items-center'>
       <Link
         href={'/'}
         className='

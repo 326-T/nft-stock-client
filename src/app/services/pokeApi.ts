@@ -11,3 +11,6 @@ export const fetchPokemons = async (limit: number, offset: number) => {
     }),
   ])
 }
+
+export const fetchPokemon = async (id: string) =>
+  axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)

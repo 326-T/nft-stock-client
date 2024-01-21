@@ -22,7 +22,7 @@
 
 .text-font {
   @apply font-normal;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .body-large {
@@ -95,4 +95,20 @@
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0.1px;
+}
+
+.w-full-grid {
+  @apply grid gap-5
+  grid-cols-1 px-5
+  sm:grid-cols-2
+  lg:grid-cols-3 lg:px-16
+  xl:grid-cols-4 
+  2xl:grid-cols-5;
+}
+
+.w-full-grid-large {
+  @apply grid gap-5
+  grid-cols-1 px-5
+  md:grid-cols-2 md:px-16
+  xl:grid-cols-3;
 }
