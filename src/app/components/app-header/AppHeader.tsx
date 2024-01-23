@@ -1,6 +1,7 @@
 import { GiChargingBull } from 'react-icons/gi'
 import UserIcon from './UserIcon'
 import Menu from './Menu'
+import Link from 'next/link'
 
 export default function AppHeader({}: {}) {
   return (
@@ -11,15 +12,16 @@ export default function AppHeader({}: {}) {
         bg-white border-b border-gray-200
       '
     >
-      <div
+      <Link
+        href='/'
         className='
           flex space-x-5
           items-center
         '
       >
         <GiChargingBull className='icon-large' />
-        <h1 className='title-large'>NFT Stock</h1>
-      </div>
+        <h1 className='title-large hidden md:block'>NFT Stock</h1>
+      </Link>
       <Menu />
       <UserIcon />
     </header>
