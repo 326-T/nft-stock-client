@@ -1,4 +1,4 @@
-import { GiChargingBull } from 'react-icons/gi'
+import { SiBitcoinsv } from 'react-icons/si'
 import UserIcon from './UserIcon'
 import Menu from './Menu'
 import Link from 'next/link'
@@ -19,8 +19,8 @@ export default function AppHeader({}: {}) {
           items-center
         '
       >
-        <GiChargingBull className='icon-large' />
-        <h1 className='title-large hidden md:block'>NFT Stock</h1>
+        <SiBitcoinsv className='icon-large text-yellow-400' />
+        <h1 className='title-large hidden md:block text-yellow-400'>Bet On Me</h1>
       </Link>
       <Menu />
       <UserIcon />

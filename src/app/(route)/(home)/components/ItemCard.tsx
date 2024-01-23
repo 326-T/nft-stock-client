@@ -5,7 +5,7 @@ import { Pokemon } from '@/types/pokemon'
 export default function ItemCard({ pokemon }: { pokemon: Pokemon }) {
   return (
     <Link
-      href={`/items/${pokemon.id}`}
+      href={`/talent/${pokemon.id}`}
       className='
         block
         w-full

@@ -10,10 +10,10 @@ export default function Menu() {
           title-small rounded-l-full
         '
       >
-        <h3>探す</h3>
+        <h3>貸す</h3>
       </Link>
       <Link
-        href='/dash-board'
+        href='/port-folio'
         className='
           btn md:w-32
           title-small rounded-none
@@ -22,13 +22,13 @@ export default function Menu() {
         <h3>確認</h3>
       </Link>
       <Link
-        href='/exhibition'
+        href='/apply-for'
         className='
           btn md:w-32
           title-small rounded-r-full
         '
       >
-        <h3>出品</h3>
+        <h3>応募</h3>
       </Link>
     </div>
   )
