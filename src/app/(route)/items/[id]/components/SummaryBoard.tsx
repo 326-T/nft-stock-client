@@ -1,12 +1,25 @@
 export default function SummaryBoard() {
   return (
-    <div className='grid justify-items-center py-10 lg:py-16 border-2 rounded-lg'>
-      <div className='flex space-x-10'>
-        <div className=''>
-          <p className='body-large'>保有数量</p>
-          <p className='title-large'>40</p>
+    <div
+      className='
+        grid justify-items-center
+        space-y-10
+        py-10 lg:py-16
+        border-2 rounded-lg
+      '
+    >
+      <div className='justify-items-start space-y-10'>
+        <div className='flex space-x-10'>
+          <div>
+            <p className='body-large'>現在順位</p>
+            <p className='title-large'>3</p>
+          </div>
+          <div>
+            <p className='body-large'>保有数量</p>
+            <p className='title-large'>40</p>
+          </div>
         </div>
-        <div className=''>
+        <div>
           <p className='body-large'>評価損益額</p>
           <p className='title-large'>+22,680</p>
         </div>

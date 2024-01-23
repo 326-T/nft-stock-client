@@ -4,7 +4,7 @@ export default function Menu() {
   return (
     <div className='flex items-center'>
       <Link
-        href={'/'}
+        href='/'
         className='
           btn md:w-32
           title-small rounded-l-full
@@ -13,7 +13,7 @@ export default function Menu() {
         <h3>探す</h3>
       </Link>
       <Link
-        href={'/dash-board'}
+        href='/dash-board'
         className='
           btn md:w-32
           title-small rounded-none
@@ -22,7 +22,7 @@ export default function Menu() {
         <h3>確認</h3>
       </Link>
       <Link
-        href={'/exhibition'}
+        href='/exhibition'
         className='
           btn md:w-32
           title-small rounded-r-full
