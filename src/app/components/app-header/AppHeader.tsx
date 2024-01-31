@@ -19,8 +19,8 @@ export default function AppHeader({}: {}) {
           items-center
         '
       >
-        <SiBitcoinsv className='icon-large text-yellow-400' />
-        <h1 className='title-large hidden md:block text-yellow-400'>Bet On Me</h1>
+        <SiBitcoinsv className='icon-large' />
+        <h1 className='title-large hidden md:block'>Bet On Me</h1>
       </Link>
       <Menu />
       <UserIcon />
