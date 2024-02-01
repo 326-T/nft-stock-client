@@ -1,24 +1,64 @@
 'use client'
 
 import { ResumeRequest, resumeRequestInit } from '@/types/resume'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import TextArea from '@/components/TextArea'
-import { postResume } from '@/services/resumeApi'
+import { getResume, patchResume, postResume } from '@/services/resumeApi'
+import Image from 'next/image'
+import { MdOutlineFileUpload } from 'react-icons/md'
 
 export default function EntryForm() {
   const [resumeRequest, setResumeRequest] = useState<ResumeRequest>(resumeRequestInit)
+  const [isFirstPost, setIsFirstPost] = useState<boolean>(true)
+
   const postResumeRequest = () => {
-    postResume(resumeRequest)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err))
+    isFirstPost
+      ? postResume(resumeRequest)
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err))
+      : patchResume(resumeRequest)
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err))
   }
+
+  useEffect(() => {
+    getResume().then((res) => {
+      if (res.data[0]) {
+        setResumeRequest(res.data[0])
+        setIsFirstPost(false)
+      }
+    })
+  }, [])
+
+  useEffect(() => {
+    console.log('resumeRequest', resumeRequest)
+  }, [resumeRequest])
 
   return (
     <div className='block'>
-      <div className='flex justify-center w-full'>
+      <div className='block md:flex justify-center w-full'>
         <div
           className='
-            w-full md:w-2/3
+            w-full md:w-1/4
+            py-5 px-10 md:py-10
+            space-y-5 md:space-y-10
+          '
+        >
+          <Image
+            src='/takeda.JPG'
+            width={0}
+            height={0}
+            sizes='100vw'
+            style={{ width: '100%', height: 'auto' }}
+            alt=''
+          />
+          <div className='flex justify-center'>
+            <MdOutlineFileUpload className='icon-small' />
+          </div>
+        </div>
+        <div
+          className='
+            w-full md:w-2/4
             py-5 px-10 md:py-10
             space-y-5 md:space-y-10
           '
@@ -45,8 +85,8 @@ export default function EntryForm() {
           />
           <TextArea
             label='参照URL'
-            value={resumeRequest.references}
-            setValue={(value) => setResumeRequest((prev) => ({ ...prev, references: value }))}
+            value={resumeRequest.urls}
+            setValue={(value) => setResumeRequest((prev) => ({ ...prev, urls: value }))}
           />
         </div>
       </div>
@@ -65,7 +105,7 @@ export default function EntryForm() {
           '
           onClick={postResumeRequest}
         >
-          <p className='title-small'>送信</p>
+          <p className='title-small'>更新</p>
         </button>
       </div>
     </div>

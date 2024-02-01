@@ -17,9 +17,8 @@ export default function TextArea({
       <textarea
         className='textaria textarea-bordered border-b-2'
         onChange={(e) => setValue(e.target.value)}
-      >
-        {value}
-      </textarea>
+        value={value}
+      />
     </label>
   )
 }

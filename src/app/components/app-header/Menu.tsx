@@ -4,22 +4,13 @@ export default function Menu() {
   return (
     <div className='flex items-center'>
       <Link
-        href='/'
+        href='/port-folio'
         className='
           btn md:w-32
           title-small rounded-l-full
         '
       >
-        <h3>貸す</h3>
-      </Link>
-      <Link
-        href='/port-folio'
-        className='
-          btn md:w-32
-          title-small rounded-none
-        '
-      >
-        <h3>ユーザ情報</h3>
+        <h3>確認</h3>
       </Link>
       <Link
         href='/apply-for'
