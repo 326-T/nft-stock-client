@@ -53,7 +53,7 @@ export default function EntryForm() {
             alt=''
           />
           <div className='flex justify-center'>
-            <MdOutlineFileUpload className='icon-small' />
+            <input type='file' className='file-input w-full max-w-xs' />
           </div>
         </div>
         <div

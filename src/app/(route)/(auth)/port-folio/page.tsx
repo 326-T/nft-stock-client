@@ -1,5 +1,5 @@
-import UnderConstruction from '@/components/UnderConstruction'
+import PortFolioContainer from './components/PortFolioContainer'
 
 export default function DashBoardPage() {
-  return <UnderConstruction />
+  return <PortFolioContainer />
 }
