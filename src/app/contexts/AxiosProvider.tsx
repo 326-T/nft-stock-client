@@ -14,10 +14,10 @@ export function AxiosProvider({ children }: { children: React.ReactNode }) {
     frontClient
       .get('/api/axios')
       .then((res) => {
+        axios.defaults.withCredentials = true
         axios.interceptors.request.clear()
         axios.interceptors.response.clear()
         axios.defaults.baseURL = res.data.baseUrl
-        axios.defaults.headers.common['Authorization'] = res.data.authorization
         axios.interceptors.request.use((config) => {
           loadingContext.turnOn()
           return config
@@ -29,6 +29,9 @@ export function AxiosProvider({ children }: { children: React.ReactNode }) {
           },
           (error) => {
             loadingContext.turnOff()
+            if (error.response?.status === 401) {
+              window.location.href = '/sign-up'
+            }
             return Promise.reject(error)
           },
         )

@@ -1,8 +1,8 @@
 'use client'
 
-import { ResumeRequest, resumeRequestInit } from '@/types/Resume'
+import { ResumeRequest, resumeRequestInit } from '@/types/resume'
 import { useState } from 'react'
-import TextArea from './TextArea'
+import TextArea from '@/components/TextArea'
 import { postResume } from '@/services/resumeApi'
 
 export default function EntryForm() {

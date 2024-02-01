@@ -3,14 +3,14 @@ import UserIcon from './UserIcon'
 import Menu from './Menu'
 import Link from 'next/link'
 
-export default function AppHeader({}: {}) {
+export default function AppHeader({ disableMenu }: { disableMenu?: boolean }) {
   return (
     <header
-      className='
+      className={`
         flex w-full p-2 md:px-10
-        items-center justify-between
+        items-center ${disableMenu ? 'justify-center' : 'justify-between'}
         bg-white border-b border-gray-200
-      '
+      `}
     >
       <Link
         href='/'
@@ -22,8 +22,12 @@ export default function AppHeader({}: {}) {
         <SiBitcoinsv className='icon-large' />
         <h1 className='title-large hidden md:block'>Bet On Me</h1>
       </Link>
-      <Menu />
-      <UserIcon />
+      {disableMenu || (
+        <>
+          <Menu />
+          <UserIcon />
+        </>
+      )}
     </header>
   )
 }

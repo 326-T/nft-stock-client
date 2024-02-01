@@ -19,7 +19,7 @@ export default function Menu() {
           title-small rounded-none
         '
       >
-        <h3>確認</h3>
+        <h3>ユーザ情報</h3>
       </Link>
       <Link
         href='/apply-for'
