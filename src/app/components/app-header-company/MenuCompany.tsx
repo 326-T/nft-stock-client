@@ -1,19 +1,19 @@
 import Link from 'next/link'
 
-export default function Menu() {
+export default function MenuCompany() {
   return (
     <div className='flex items-center'>
       <Link
-        href='/applicant'
+        href='/company'
         className='
           btn md:w-32
           title-small rounded-l-full
         '
       >
-        <h3>応募</h3>
+        <h3>探す</h3>
       </Link>
       <Link
-        href='/applicant/port-folio'
+        href='/company/port-folio'
         className='
           btn md:w-32
           title-small rounded-r-full
