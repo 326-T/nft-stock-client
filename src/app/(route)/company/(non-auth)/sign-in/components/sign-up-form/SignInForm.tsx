@@ -1,18 +1,18 @@
 'use client'
 
 import { useState } from 'react'
-import { loginApplicant } from '@/services/applicantApi'
+import { loginCompany } from '@/services/companyApi'
 import Input from '@/components/Input'
-import { ApplicantRequest, applicantRequestInit } from '@/types/applicant'
+import { CompanyRequest, companyRequestInit } from '@/types/company'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 export default function SignInForm() {
-  const [applicantRequest, setApplicantRequest] = useState<ApplicantRequest>(applicantRequestInit)
+  const [companyRequest, setCompanyRequest] = useState<CompanyRequest>(companyRequestInit)
   const router = useRouter()
-  const postApplicantRequest = () => {
-    loginApplicant(applicantRequest)
-      .then((res) => router.push('/applicant'))
+  const postCompanyRequest = () => {
+    loginCompany(companyRequest)
+      .then((res) => router.push('/company/apply-for'))
       .catch((err) => console.log(err))
   }
 
@@ -28,15 +28,15 @@ export default function SignInForm() {
         >
           <Input
             label='メールアドレス'
-            value={applicantRequest.email}
-            setValue={(value) => setApplicantRequest((prev) => ({ ...prev, email: value }))}
+            value={companyRequest.email}
+            setValue={(value) => setCompanyRequest((prev) => ({ ...prev, email: value }))}
           />
           <Input
             label='パスワード'
-            value={applicantRequest.password}
-            setValue={(value) => setApplicantRequest((prev) => ({ ...prev, password: value }))}
+            value={companyRequest.password}
+            setValue={(value) => setCompanyRequest((prev) => ({ ...prev, password: value }))}
           />
-          <Link href='/applicant/sign-up'>
+          <Link href='/company/sign-up'>
             <h3 className='pt-5 md:p-10 text-center text-blue-500 underline'>アカウント新規作成</h3>
           </Link>
         </div>
@@ -54,7 +54,7 @@ export default function SignInForm() {
             rounded-none md:rounded-full
             w-full md:w-1/5
           '
-          onClick={postApplicantRequest}
+          onClick={postCompanyRequest}
         >
           <p className='title-small'>ログイン</p>
         </button>

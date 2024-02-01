@@ -1,19 +1,19 @@
 'use client'
 
 import { useState } from 'react'
-import { postApplicant } from '@/services/applicantApi'
+import { postCompany } from '@/services/companyApi'
 import Input from '@/components/Input'
-import { ApplicantRequest, applicantRequestInit } from '@/types/applicant'
+import { CompanyRequest, companyRequestInit } from '@/types/company'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 export default function SignUpForm() {
-  const [applicantRequest, setApplicantRequest] = useState<ApplicantRequest>(applicantRequestInit)
+  const [companyRequest, setCompanyRequest] = useState<CompanyRequest>(companyRequestInit)
   const [passwordConfirm, setPasswordConfirm] = useState<string>('')
   const router = useRouter()
-  const postApplicantRequest = () => {
-    postApplicant(applicantRequest)
-      .then((res) => router.push('/applicant'))
+  const postCompanyRequest = () => {
+    postCompany(companyRequest)
+      .then((res) => router.push('/company/apply-for'))
       .catch((err) => console.log(err))
   }
 
@@ -28,37 +28,32 @@ export default function SignUpForm() {
           '
         >
           <Input
-            label='名字'
-            value={applicantRequest.firstName}
-            setValue={(value) => setApplicantRequest((prev) => ({ ...prev, firstName: value }))}
-          />
-          <Input
-            label='名前'
-            value={applicantRequest.lastName}
-            setValue={(value) => setApplicantRequest((prev) => ({ ...prev, lastName: value }))}
+            label='企業名'
+            value={companyRequest.name}
+            setValue={(value) => setCompanyRequest((prev) => ({ ...prev, name: value }))}
           />
           <Input
             label='メールアドレス'
-            value={applicantRequest.email}
-            setValue={(value) => setApplicantRequest((prev) => ({ ...prev, email: value }))}
+            value={companyRequest.email}
+            setValue={(value) => setCompanyRequest((prev) => ({ ...prev, email: value }))}
           />
           <Input
             label='電話番号'
-            value={applicantRequest.phone}
-            setValue={(value) => setApplicantRequest((prev) => ({ ...prev, phone: value }))}
+            value={companyRequest.phone}
+            setValue={(value) => setCompanyRequest((prev) => ({ ...prev, phone: value }))}
           />
           <Input
             label='住所'
-            value={applicantRequest.address}
-            setValue={(value) => setApplicantRequest((prev) => ({ ...prev, address: value }))}
+            value={companyRequest.address}
+            setValue={(value) => setCompanyRequest((prev) => ({ ...prev, address: value }))}
           />
           <Input
             label='パスワード'
-            value={applicantRequest.password}
-            setValue={(value) => setApplicantRequest((prev) => ({ ...prev, password: value }))}
+            value={companyRequest.password}
+            setValue={(value) => setCompanyRequest((prev) => ({ ...prev, password: value }))}
           />
           <Input label='パスワード (確認)' value={passwordConfirm} setValue={setPasswordConfirm} />
-          <Link href='/applicant/sign-in'>
+          <Link href='/company/sign-in'>
             <h3 className='pt-5 md:p-10 text-center text-blue-500 underline'>
               すでにアカウントをお持ちの場合
             </h3>
@@ -78,7 +73,7 @@ export default function SignUpForm() {
             rounded-none md:rounded-full
             w-full md:w-1/5
           '
-          onClick={postApplicantRequest}
+          onClick={postCompanyRequest}
         >
           <p className='title-small'>登録</p>
         </button>

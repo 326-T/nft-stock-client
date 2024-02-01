@@ -9,6 +9,7 @@ export interface Resume {
   skills: string
   interests: string
   urls: string
+  picture: string
   createdAt: Date
   updatedAt: Date
   version: number
@@ -23,6 +24,7 @@ export interface ResumeRequest {
   skills: string
   interests: string
   urls: string
+  picture: string
 }
 
 export const resumeRequestInit = {
@@ -34,4 +36,5 @@ export const resumeRequestInit = {
   skills: '',
   interests: '',
   urls: '',
+  picture: '',
 }

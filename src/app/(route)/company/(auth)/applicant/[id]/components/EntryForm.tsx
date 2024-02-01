@@ -3,30 +3,18 @@
 import { ResumeRequest, resumeRequestInit } from '@/types/resume'
 import { useEffect, useState } from 'react'
 import TextArea from '@/components/TextArea'
-import { getResume, patchResume, postResume } from '@/services/resumeApi'
+import { findById } from '@/services/resumeApi'
 import Image from 'next/image'
-import { MdOutlineFileUpload } from 'react-icons/md'
+import { PiUserSquareDuotone } from 'react-icons/pi'
+import { useParams } from 'next/navigation'
 
 export default function EntryForm() {
+  const params = useParams<{ id: string }>()
   const [resumeRequest, setResumeRequest] = useState<ResumeRequest>(resumeRequestInit)
-  const [isFirstPost, setIsFirstPost] = useState<boolean>(true)
-
-  const postResumeRequest = () => {
-    isFirstPost
-      ? postResume(resumeRequest)
-          .then((res) => console.log(res))
-          .catch((err) => console.log(err))
-      : patchResume(resumeRequest)
-          .then((res) => console.log(res))
-          .catch((err) => console.log(err))
-  }
 
   useEffect(() => {
-    getResume().then((res) => {
-      if (res.data[0]) {
-        setResumeRequest(res.data[0])
-        setIsFirstPost(false)
-      }
+    findById(params.id).then((res) => {
+      setResumeRequest(res.data)
     })
   }, [])
 
@@ -44,16 +32,24 @@ export default function EntryForm() {
             space-y-5 md:space-y-10
           '
         >
-          <Image
-            src='/takeda.JPG'
-            width={0}
-            height={0}
-            sizes='100vw'
-            style={{ width: '100%', height: 'auto' }}
-            alt=''
-          />
-          <div className='flex justify-center'>
-            <input type='file' className='file-input w-full max-w-xs' />
+          <div className='flex w-full justify-center'>
+            {resumeRequest.picture ? (
+              <Image
+                src={resumeRequest.picture}
+                alt={''}
+                width={0}
+                height={0}
+                sizes='100vw'
+                style={{ width: '100%', height: 'auto' }}
+              />
+            ) : (
+              <PiUserSquareDuotone
+                width={0}
+                height={0}
+                size='100vw'
+                style={{ width: '100%', height: 'auto' }}
+              />
+            )}
           </div>
         </div>
         <div
@@ -89,24 +85,6 @@ export default function EntryForm() {
             setValue={(value) => setResumeRequest((prev) => ({ ...prev, urls: value }))}
           />
         </div>
-      </div>
-      <div
-        className='
-          fixed bottom-0 md:static
-          md:flex md:justify-center
-          w-full
-        '
-      >
-        <button
-          className='
-            btn
-            rounded-none md:rounded-full
-            w-full md:w-1/5
-          '
-          onClick={postResumeRequest}
-        >
-          <p className='title-small'>募集開始</p>
-        </button>
       </div>
     </div>
   )
