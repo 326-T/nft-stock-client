@@ -1,4 +1,4 @@
-import { SiBitcoinsv } from 'react-icons/si'
+import { FaUndoAlt } from 'react-icons/fa'
 import UserIcon from './UserIcon'
 import Menu from './Menu'
 import Link from 'next/link'
@@ -13,14 +13,14 @@ export default function AppHeader({ disableMenu }: { disableMenu?: boolean }) {
       `}
     >
       <Link
-        href='/'
+        href='/applicant'
         className='
           flex space-x-5
           items-center
         '
       >
-        <SiBitcoinsv className='icon-large' />
-        <h1 className='title-large hidden md:block'>Bet On Me</h1>
+        <FaUndoAlt className='icon-large' />
+        <h1 className='title-large hidden md:block'>Reverse cruit</h1>
       </Link>
       {disableMenu || (
         <>

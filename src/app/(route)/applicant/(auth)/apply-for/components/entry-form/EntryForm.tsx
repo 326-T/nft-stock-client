@@ -105,7 +105,7 @@ export default function EntryForm() {
           '
           onClick={postResumeRequest}
         >
-          <p className='title-small'>更新</p>
+          <p className='title-small'>募集開始</p>
         </button>
       </div>
     </div>
