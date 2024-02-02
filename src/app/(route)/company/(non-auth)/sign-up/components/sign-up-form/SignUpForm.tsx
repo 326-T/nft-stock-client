@@ -36,11 +36,13 @@ export default function SignUpForm() {
             label='メールアドレス'
             value={companyRequest.email}
             setValue={(value) => setCompanyRequest((prev) => ({ ...prev, email: value }))}
+            type='email'
           />
           <Input
             label='電話番号'
             value={companyRequest.phone}
             setValue={(value) => setCompanyRequest((prev) => ({ ...prev, phone: value }))}
+            type='tel'
           />
           <Input
             label='住所'
@@ -51,8 +53,14 @@ export default function SignUpForm() {
             label='パスワード'
             value={companyRequest.password}
             setValue={(value) => setCompanyRequest((prev) => ({ ...prev, password: value }))}
+            type='password'
           />
-          <Input label='パスワード (確認)' value={passwordConfirm} setValue={setPasswordConfirm} />
+          <Input
+            label='パスワード (確認)'
+            value={passwordConfirm}
+            setValue={setPasswordConfirm}
+            type='password'
+          />
           <Link href='/company/sign-in'>
             <h3 className='pt-5 md:p-10 text-center text-blue-500 underline'>
               すでにアカウントをお持ちの場合
