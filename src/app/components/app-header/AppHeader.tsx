@@ -20,7 +20,7 @@ export default function AppHeader({ disableMenu }: { disableMenu?: boolean }) {
         '
       >
         <FaUndoAlt className='icon-large' />
-        <h1 className='title-large hidden md:block'>Reverse cruit</h1>
+        <h1 className='title-large hidden md:block'>Reverse Cruit</h1>
       </Link>
       {disableMenu || (
         <>
