@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { LoadingProvider } from './contexts/LoadingProvider'
 import { AxiosProvider } from './contexts/AxiosProvider'
+import { AuthProvider } from './contexts/AuthContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,7 +21,9 @@ export default function RootLayout({
     <html lang='jp'>
       <body className={inter.className}>
         <LoadingProvider>
-          <AxiosProvider>{children}</AxiosProvider>
+          <AxiosProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </AxiosProvider>
         </LoadingProvider>
       </body>
     </html>
