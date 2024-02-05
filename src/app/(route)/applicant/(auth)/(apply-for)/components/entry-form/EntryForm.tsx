@@ -6,12 +6,59 @@ import TextArea from '@/components/TextArea'
 import { getMine, patchResume, postResume } from '@/services/resumeApi'
 import Image from 'next/image'
 import { PiUserSquareDuotone } from 'react-icons/pi'
+import { ethers } from "ethers"
 
 export default function EntryForm() {
   const [resumeRequest, setResumeRequest] = useState<ResumeRequest>(resumeRequestInit)
   const [isFirstPost, setIsFirstPost] = useState<boolean>(true)
 
+  const issueRecruitRight = async () => {
+    // const apiKey = process.env.REACT_APP_SEPOLIA_API_KEY_URL
+    const apiKey = "https://eth-sepolia.g.alchemy.com/v2/WSFIHmg3YapiAmqPMNdPbURMhUio2AFc"
+    const sepoliaProvider = new ethers.JsonRpcProvider(apiKey)
+    const contractAddress = "0x7328a0952BE679C17B83050B5edF407F7efc507c"
+    
+    const abi = [
+      {
+          "inputs": [
+              {
+                  "internalType": "uint256",
+                  "name": "_price",
+                  "type": "uint256"
+              }
+          ],
+          "name": "issueRecruitRight",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+      }
+    ];
+
+    // const privateKey = process.env.REACT_APP_WALLET_PRIVATE_KEY
+    const privateKey = "[ウォレットの秘密鍵]"
+    if (!privateKey) {
+      console.error('Error: PRIVATE_KEY is missing')
+      return
+    }
+
+    const signer = new ethers.Wallet(privateKey, sepoliaProvider)
+
+    // Connect to the deployed contract with a signer (which will allow state-changing operations like "send")
+    const contract = new ethers.Contract(contractAddress, abi, signer)
+
+    // Define value of _price
+    const _price = ethers.parseUnits('0.01', 'ether')
+
+    // Call issueRecruitRight function from the contract
+    const tx = await contract.issueRecruitRight(_price)
+    console.log(tx)
+
+    const receipt = await tx.wait()
+    console.log(receipt)
+  }
+
   const postResumeRequest = () => {
+    issueRecruitRight()
     isFirstPost
       ? postResume(resumeRequest)
           .then((res) => console.log(res))
