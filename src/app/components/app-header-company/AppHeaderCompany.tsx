@@ -20,7 +20,7 @@ export default function AppHeaderCompany({ disableMenu }: { disableMenu?: boolea
         '
       >
         <FaUndoAlt className='icon-large' />
-        <h1 className='title-large hidden md:block'>Reverse cruit for Company</h1>
+        <h1 className='title-large hidden md:block'>Reverse Cruit for Company</h1>
       </Link>
       {disableMenu || (
         <>

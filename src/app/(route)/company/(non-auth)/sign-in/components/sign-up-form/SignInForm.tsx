@@ -12,7 +12,7 @@ export default function SignInForm() {
   const router = useRouter()
   const postCompanyRequest = () => {
     loginCompany(companyRequest)
-      .then((res) => router.push('/company/apply-for'))
+      .then((res) => router.push('/company'))
       .catch((err) => console.log(err))
   }
 
@@ -30,11 +30,13 @@ export default function SignInForm() {
             label='メールアドレス'
             value={companyRequest.email}
             setValue={(value) => setCompanyRequest((prev) => ({ ...prev, email: value }))}
+            type='email'
           />
           <Input
             label='パスワード'
             value={companyRequest.password}
             setValue={(value) => setCompanyRequest((prev) => ({ ...prev, password: value }))}
+            type='password'
           />
           <Link href='/company/sign-up'>
             <h3 className='pt-5 md:p-10 text-center text-blue-500 underline'>アカウント新規作成</h3>

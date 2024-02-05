@@ -30,11 +30,13 @@ export default function SignInForm() {
             label='メールアドレス'
             value={applicantRequest.email}
             setValue={(value) => setApplicantRequest((prev) => ({ ...prev, email: value }))}
+            type='email'
           />
           <Input
             label='パスワード'
             value={applicantRequest.password}
             setValue={(value) => setApplicantRequest((prev) => ({ ...prev, password: value }))}
+            type='password'
           />
           <Link href='/applicant/sign-up'>
             <h3 className='pt-5 md:p-10 text-center text-blue-500 underline'>アカウント新規作成</h3>
