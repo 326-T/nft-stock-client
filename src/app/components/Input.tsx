@@ -3,11 +3,13 @@ export default function Input({
   setValue,
   label,
   type,
+  step,
 }: {
   value: string
   setValue: (value: string) => void
   label?: string
   type?: string
+  step?: string
 }) {
   return (
     <label className='form-control'>
@@ -21,6 +23,7 @@ export default function Input({
         onChange={(e) => setValue(e.target.value)}
         value={value}
         type={type ? type : 'text'}
+        step={step}
       />
     </label>
   )

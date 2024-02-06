@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { LoadingProvider } from './contexts/LoadingProvider'
-import { AxiosProvider } from './contexts/AxiosProvider'
+import { LoadingProvider } from './contexts/LoadingContext'
+import { AxiosProvider } from './contexts/AxiosContext'
 import { AuthProvider } from './contexts/AuthContext'
 import { EnvProvider } from './contexts/EnvContext'
 

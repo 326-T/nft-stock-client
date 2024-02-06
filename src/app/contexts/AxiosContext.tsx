@@ -1,7 +1,7 @@
 'use client'
 import axios from 'axios'
 import { createContext, useContext, useEffect, useState } from 'react'
-import { LoadingContext } from './LoadingProvider'
+import { LoadingContext } from './LoadingContext'
 import { EnvContext } from './EnvContext'
 
 export const AxiosContext = createContext<{}>({})
