@@ -6,19 +6,28 @@ import TextArea from '@/components/TextArea'
 import { getMine, patchResume, postResume } from '@/services/resumeApi'
 import Image from 'next/image'
 import { PiUserSquareDuotone } from 'react-icons/pi'
+import { useReverseRecruitContract } from '@/contexts/ContractContext'
+import Input from '@/components/Input'
 
 export default function EntryForm() {
   const [resumeRequest, setResumeRequest] = useState<ResumeRequest>(resumeRequestInit)
+  const [price, setPrice] = useState<number>(0)
   const [isFirstPost, setIsFirstPost] = useState<boolean>(true)
+  const contract = useReverseRecruitContract()
 
   const postResumeRequest = () => {
-    isFirstPost
-      ? postResume(resumeRequest)
-          .then((res) => console.log(res))
-          .catch((err) => console.log(err))
-      : patchResume(resumeRequest)
-          .then((res) => console.log(res))
-          .catch((err) => console.log(err))
+    if (isFirstPost) {
+      postResume(resumeRequest)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
+    }
+    patchResume(resumeRequest)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
+    contract
+      .issueRecruitRight(price)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
   }
 
   useEffect(() => {
@@ -29,10 +38,6 @@ export default function EntryForm() {
       }
     })
   }, [])
-
-  useEffect(() => {
-    console.log('resumeRequest', resumeRequest)
-  }, [resumeRequest])
 
   return (
     <div className='block'>
@@ -66,6 +71,13 @@ export default function EntryForm() {
           <div className='flex justify-center'>
             <input type='file' className='file-input w-full max-w-xs' />
           </div>
+          <Input
+            label='希望金額'
+            value={price.toString()}
+            setValue={(value) => setPrice(Number(value))}
+            type='number'
+            step='0.01'
+          />
         </div>
         <div
           className='
