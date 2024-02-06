@@ -44,6 +44,13 @@ export default function SignUpForm() {
             type='email'
           />
           <Input
+            label='METAMASKアドレス'
+            value={applicantRequest.metamaskAddress}
+            setValue={(value) =>
+              setApplicantRequest((prev) => ({ ...prev, metamaskAddress: value }))
+            }
+          />
+          <Input
             label='電話番号'
             value={applicantRequest.phone}
             setValue={(value) => setApplicantRequest((prev) => ({ ...prev, phone: value }))}

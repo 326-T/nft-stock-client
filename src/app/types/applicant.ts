@@ -5,6 +5,7 @@ export interface Applicant {
   email: string
   phone: string
   address: string
+  metamaskAddress: string
 }
 
 export interface ApplicantRequest {
@@ -15,6 +16,7 @@ export interface ApplicantRequest {
   phone: string
   address: string
   password: string
+  metamaskAddress: string
 }
 
 export const applicantRequestInit = {
@@ -25,4 +27,5 @@ export const applicantRequestInit = {
   phone: '',
   address: '',
   password: '',
+  metamaskAddress: '',
 }

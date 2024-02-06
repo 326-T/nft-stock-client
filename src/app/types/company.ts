@@ -4,6 +4,7 @@ export interface Company {
   email: string
   phone: string
   address: string
+  metamaskAddress: string
 }
 
 export interface CompanyRequest {
@@ -13,6 +14,7 @@ export interface CompanyRequest {
   phone: string
   address: string
   password: string
+  metamaskAddress: string
 }
 
 export const companyRequestInit = {
@@ -22,4 +24,5 @@ export const companyRequestInit = {
   phone: '',
   address: '',
   password: '',
+  metamaskAddress: '',
 }
