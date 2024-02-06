@@ -3,7 +3,7 @@
 import { ethers } from 'ethers'
 import { useContext } from 'react'
 import { useContract, useContractWrite } from '@thirdweb-dev/react'
-import { EnvContext } from './EnvContext'
+import { EnvContext } from '../contexts/EnvContext'
 
 export const useReverseRecruitContract = () => {
   const envContext = useContext(EnvContext)

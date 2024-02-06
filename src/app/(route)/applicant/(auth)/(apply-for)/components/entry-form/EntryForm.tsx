@@ -6,7 +6,7 @@ import TextArea from '@/components/TextArea'
 import { getMine, patchResume, postResume } from '@/services/resumeApi'
 import Image from 'next/image'
 import { PiUserSquareDuotone } from 'react-icons/pi'
-import { useReverseRecruitContract } from '@/contexts/ContractContext'
+import { useReverseRecruitContract } from '@/hooks/useReverseRecruitContract'
 import Input from '@/components/Input'
 
 export default function EntryForm() {
