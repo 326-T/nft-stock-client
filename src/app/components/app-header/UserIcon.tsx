@@ -1,5 +1,6 @@
 'use client'
 
+import { ConnectWallet } from '@thirdweb-dev/react'
 import { AuthContext } from '@/contexts/AuthContext'
 import { useContext } from 'react'
 import { FaCircleUser } from 'react-icons/fa6'
@@ -41,7 +42,7 @@ export default function UserIcon() {
           <a>{authContext.applicant?.email}</a>
         </li>
         <li>
-          <a>{authContext.applicant?.metamaskAddress}</a>
+          <ConnectWallet />
         </li>
       </ul>
     </div>
