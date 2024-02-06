@@ -1,44 +1,39 @@
 'use client'
-import axios, { AxiosInstance } from 'axios'
+import axios from 'axios'
 import { createContext, useContext, useEffect, useState } from 'react'
 import { LoadingContext } from './LoadingProvider'
+import { EnvContext } from './EnvContext'
 
 export const AxiosContext = createContext<{}>({})
 
 export function AxiosProvider({ children }: { children: React.ReactNode }) {
   const [isAxiosReady, setIsAxiosReady] = useState(false)
   const loadingContext = useContext(LoadingContext)
+  const envContext = useContext(EnvContext)
 
-  const setUpAxios = async () => {
-    const frontClient: AxiosInstance = axios.create()
-    frontClient
-      .get('/api/axios')
-      .then((res) => {
-        axios.defaults.withCredentials = true
-        axios.interceptors.request.clear()
-        axios.interceptors.response.clear()
-        axios.defaults.baseURL = res.data.baseUrl
-        axios.interceptors.request.use((config) => {
-          loadingContext.turnOn()
-          return config
-        })
-        axios.interceptors.response.use(
-          (response) => {
-            loadingContext.turnOff()
-            return response
-          },
-          (error) => {
-            loadingContext.turnOff()
-            if (error.response?.status === 401) {
-              window.location.href = '/sign-up'
-            }
-            return Promise.reject(error)
-          },
-        )
-      })
-      .finally(() => {
-        setIsAxiosReady(true)
-      })
+  const setUpAxios = () => {
+    axios.defaults.withCredentials = true
+    axios.interceptors.request.clear()
+    axios.interceptors.response.clear()
+    axios.defaults.baseURL = envContext.baseUrl
+    axios.interceptors.request.use((config) => {
+      loadingContext.turnOn()
+      return config
+    })
+    axios.interceptors.response.use(
+      (response) => {
+        loadingContext.turnOff()
+        return response
+      },
+      (error) => {
+        loadingContext.turnOff()
+        if (error.response?.status === 401) {
+          window.location.href = '/sign-up'
+        }
+        return Promise.reject(error)
+      },
+    )
+    setIsAxiosReady(true)
   }
 
   useEffect(() => {
