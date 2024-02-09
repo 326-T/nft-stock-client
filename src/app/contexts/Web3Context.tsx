@@ -1,10 +1,5 @@
 'use client'
 
-import { fetchCurrentApplicant } from '@/services/applicantApi'
-import { fetchCurrentCompany } from '@/services/companyApi'
-import { Applicant } from '@/types/applicant'
-import { Company } from '@/types/company'
-import { usePathname, useRouter } from 'next/navigation'
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { EnvContext } from './EnvContext'
 import { useAddress, useConnect, useContract } from '@thirdweb-dev/react'

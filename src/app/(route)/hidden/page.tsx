@@ -6,17 +6,15 @@ import { useReverseRecruitContract } from '@/hooks/useReverseRecruitContract'
 import { useContractRead } from '@thirdweb-dev/react'
 
 export default function Page() {
-  const { burn, contract, isReady } = useReverseRecruitContract()
+  const { burn, contract } = useReverseRecruitContract()
   const { data, error } = useContractRead(contract, 'getAllTokens')
 
   const burnSigle = (id: string) => {
-    if (!isReady) return
     burn(id)
       .then((res) => console.log(res))
       .catch((err) => console.log(err))
   }
   const burnMultiple = (ids: string[]) => {
-    if (!isReady) return
     Promise.all(ids.map((id) => burnSigle(id)))
       .then((res) => console.log(res))
       .catch((err) => console.log(err))

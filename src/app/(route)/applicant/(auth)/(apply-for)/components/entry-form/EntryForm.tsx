@@ -1,19 +1,21 @@
 'use client'
 
 import { ResumeRequest, resumeRequestInit } from '@/types/resume'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import TextArea from '@/components/TextArea'
 import { getMine, patchResume, postResume } from '@/services/resumeApi'
 import Image from 'next/image'
 import { PiUserSquareDuotone } from 'react-icons/pi'
 import { useReverseRecruitContract } from '@/hooks/useReverseRecruitContract'
 import Input from '@/components/Input'
+import { Web3Context } from '@/contexts/Web3Context'
 
 export default function EntryForm() {
   const [resumeRequest, setResumeRequest] = useState<ResumeRequest>(resumeRequestInit)
   const [price, setPrice] = useState<number>(0)
   const [isFirstPost, setIsFirstPost] = useState<boolean>(true)
-  const { issueRecruitRight, isReady } = useReverseRecruitContract()
+  const { issueRecruitRight } = useReverseRecruitContract()
+  const { isReady } = useContext(Web3Context)
 
   const postResumeRequest = async () => {
     if (isFirstPost) {

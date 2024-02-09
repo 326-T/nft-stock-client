@@ -21,5 +21,5 @@ export const useReverseRecruitContract = () => {
     burnMutate({ args: [Number(token)] })
   }
 
-  return { issueRecruitRight, burn, contract, isReady }
+  return { issueRecruitRight, burn, contract }
 }
