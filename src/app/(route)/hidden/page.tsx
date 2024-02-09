@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import DeleteSingleToken from './components/DeleteSingleToken'
 import TokenTable from './components/TokenTable'
 import { useReverseRecruitContract } from '@/hooks/useReverseRecruitContract'
@@ -17,11 +17,10 @@ export default function Page() {
       .then((res) => console.log(res))
       .catch((err) => console.log(err))
   }
-  const burnMultiple = (ids: string[]) => {
-    Promise.all(ids.map((id) => burnSigle(id)))
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err))
-  }
+
+  useEffect(() => {
+    console.log('getAllTokens', data)
+  }, [data])
 
   return (
     <div className='block p-10 justify-center items-center space-y-10'>

@@ -7,7 +7,6 @@ import { GrDocumentTime } from 'react-icons/gr'
 
 export default function ContractIcon() {
   const { isReady } = useContext(Web3Context)
-
   return (
     <>
       {isReady ? (

@@ -1,5 +1,6 @@
 'use client'
 
+import { BigNumber } from 'ethers'
 import { useReverseRecruitContract } from '@/hooks/useReverseRecruitContract'
 import { useContractRead } from '@thirdweb-dev/react'
 import { useEffect, useState } from 'react'
@@ -20,10 +21,14 @@ export default function TokenTable() {
       .catch((err) => console.log(err))
   }
 
+  useEffect(() => {
+    console.log('getAllTokens', data)
+  }, [data])
+
   return (
     <>
-      {data && (
-        <div className='block'>
+      {Array.isArray(data) && (
+        <div className='block space-y-5'>
           <button className='btn btn-red' onClick={burnMultiple}>
             Delete
           </button>
@@ -34,24 +39,33 @@ export default function TokenTable() {
                 <input
                   type='checkbox'
                   checked={selectedIds.length === data.length}
-                  onChange={(e) => {}}
+                  onChange={(e) => {
+                    if (selectedIds.length === data.length) setSelectedIds([])
+                    else setSelectedIds(data.map((_, index) => index))
+                  }}
                 />
                 <th>Token</th>
               </tr>
             </thead>
             <tbody>
-              {data.map((token: string, index: number) => (
-                <tr key={token}>
-                  <td>
-                    <input
-                      type='checkbox'
-                      checked={selectedIds.includes(index)}
-                      onChange={(e) => {}}
-                    />
-                  </td>
-                  <td>{token}</td>
-                </tr>
-              ))}
+              {data
+                .map((token: BigNumber) => token.toNumber())
+                .map((token: number, index: number) => (
+                  <tr key={token}>
+                    <td>
+                      <input
+                        type='checkbox'
+                        checked={selectedIds.includes(index)}
+                        onChange={(e) => {
+                          if (!selectedIds.includes(index))
+                            setSelectedIds((prev) => [...prev, index])
+                          else setSelectedIds((prev) => prev.filter((id) => id !== index))
+                        }}
+                      />
+                    </td>
+                    <td>{token}</td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>

@@ -7,6 +7,7 @@ import { useContext } from 'react'
 import ClientOnly from '@/components/ClientOnly'
 import Loading from '@/components/Loading'
 import { Web3Provider } from '@/contexts/Web3Context'
+import DrawerRight from '@/components/drawer/DrawerRIght'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const envContext = useContext(EnvContext)
@@ -14,6 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <ClientOnly>
       <Loading />
+      <DrawerRight />
       <ThirdwebProvider
         supportedWallets={[metamaskWallet({ recommended: true })]}
         activeChain={Sepolia}
