@@ -1,87 +1,61 @@
 'use client'
 
+import { useReverseRecruitContract } from '@/hooks/useReverseRecruitContract'
+import { useContractRead } from '@thirdweb-dev/react'
 import { useEffect, useState } from 'react'
 
-export default function TokenTable({
-  data,
-  onDeleteClick,
-}: {
-  data: string[]
-  onDeleteClick: (ids: string[]) => void
-}) {
-  const [tokens, setTokens] = useState<
-    {
-      token: string
-      selected: boolean
-    }[]
-  >([])
+export default function TokenTable() {
+  const [selectedIds, setSelectedIds] = useState<number[]>([])
+  const { burn, contract } = useReverseRecruitContract()
+  const { data, error } = useContractRead(contract, 'getAllTokens')
 
-  useEffect(
-    () =>
-      setTokens(
-        data.map((token) => ({
-          token,
-          selected: false,
-        })),
-      ),
-    [data],
-  )
+  const burnSigle = (id: string) => {
+    burn(id)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
+  }
+  const burnMultiple = () => {
+    Promise.all(data.map((id: string) => burnSigle(id)))
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
+  }
 
   return (
-    <div className='block'>
-      <button
-        className='btn btn-red'
-        onClick={() => {
-          onDeleteClick(tokens.filter((t) => t.selected).map((t) => t.token))
-        }}
-      >
-        Delete
-      </button>
-      <table className='table table-zebra'>
-        <thead>
-          <tr>
-            <th>
-              <input
-                type='checkbox'
-                onChange={(e) => {
-                  setTokens(
-                    tokens.map((token) => ({
-                      ...token,
-                      selected: e.target.checked,
-                    })),
-                  )
-                }}
-              />
-            </th>
-            <th>Token</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tokens.map((token) => (
-            <tr key={token.token}>
-              <td>
+    <>
+      {data && (
+        <div className='block'>
+          <button className='btn btn-red' onClick={burnMultiple}>
+            Delete
+          </button>
+
+          <table className='table table-zebra'>
+            <thead>
+              <tr>
                 <input
                   type='checkbox'
-                  checked={token.selected}
-                  onChange={(e) => {
-                    setTokens(
-                      tokens.map((t) =>
-                        t.token === token.token
-                          ? {
-                              ...t,
-                              selected: e.target.checked,
-                            }
-                          : t,
-                      ),
-                    )
-                  }}
+                  checked={selectedIds.length === data.length}
+                  onChange={(e) => {}}
                 />
-              </td>
-              <td>{token.token}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+                <th>Token</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((token: string, index: number) => (
+                <tr key={token}>
+                  <td>
+                    <input
+                      type='checkbox'
+                      checked={selectedIds.includes(index)}
+                      onChange={(e) => {}}
+                    />
+                  </td>
+                  <td>{token}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </>
   )
 }

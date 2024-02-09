@@ -10,18 +10,14 @@ import { Web3Provider } from '@/contexts/Web3Context'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const envContext = useContext(EnvContext)
-  const customChain = {
-    ...Sepolia,
-    chainId: 11155111,
-    rpc: [envContext.apiKey],
-  }
 
   return (
     <ClientOnly>
       <Loading />
       <ThirdwebProvider
         supportedWallets={[metamaskWallet({ recommended: true })]}
-        activeChain={customChain}
+        activeChain={Sepolia}
+        clientId={envContext.apiKey}
       >
         <Web3Provider>{children}</Web3Provider>
       </ThirdwebProvider>
