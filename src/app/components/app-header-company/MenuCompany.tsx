@@ -10,15 +10,6 @@ export default function MenuCompany() {
           title-small rounded-l-full
         '
       >
-        <h3>企業情報</h3>
-      </Link>
-      <Link
-        href='/company/search'
-        className='
-          btn md:w-32
-          title-small rounded-none
-        '
-      >
         <h3>探す</h3>
       </Link>
       <Link

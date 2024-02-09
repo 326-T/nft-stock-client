@@ -1,9 +1,7 @@
-'use client'
-
-import { ConnectWallet } from '@thirdweb-dev/react'
 import { FaUndoAlt } from 'react-icons/fa'
 import Menu from './Menu'
 import Link from 'next/link'
+import UserIcon from './UserIcon'
 
 export default function AppHeader({ disableMenu }: { disableMenu?: boolean }) {
   return (
@@ -24,8 +22,12 @@ export default function AppHeader({ disableMenu }: { disableMenu?: boolean }) {
         <FaUndoAlt className='icon-large' />
         <h1 className='title-large hidden md:block'>Reverse Cruit</h1>
       </Link>
-      {disableMenu || <Menu />}
-      <ConnectWallet />
+      {disableMenu || (
+        <>
+          <Menu />
+          <UserIcon />
+        </>
+      )}
     </header>
   )
 }

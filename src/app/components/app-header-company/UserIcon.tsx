@@ -5,6 +5,7 @@ import { AuthContext } from '@/contexts/AuthContext'
 import { useContext } from 'react'
 import { FaCircleUser } from 'react-icons/fa6'
 import { IoMenu } from 'react-icons/io5'
+import Link from 'next/link'
 
 export default function UserIcon() {
   const authContext = useContext(AuthContext)
@@ -34,10 +35,9 @@ export default function UserIcon() {
         '
       >
         <li>
-          <a>{authContext.company?.name}</a>
-        </li>
-        <li>
-          <a>{authContext.company?.email}</a>
+          <Link href='/company/profile'>
+            <p>プロフィール</p>
+          </Link>
         </li>
         <li>
           <ConnectWallet />
