@@ -26,6 +26,7 @@ export default function UserIcon() {
       <ul
         tabIndex={0}
         className='
+          block
           dropdown-content
           z-[1] p-5
           space-y-3
@@ -35,12 +36,12 @@ export default function UserIcon() {
         '
       >
         <li>
-          <Link href='/company/profile'>
-            <p>プロフィール</p>
-          </Link>
+          <ConnectWallet />
         </li>
         <li>
-          <ConnectWallet />
+          <Link href='/company/profile'>
+            <button className='btn w-full'>プロフィール</button>
+          </Link>
         </li>
       </ul>
     </div>

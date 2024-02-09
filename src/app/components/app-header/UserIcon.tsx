@@ -35,12 +35,12 @@ export default function UserIcon() {
         '
       >
         <li>
-          <Link href='/applicant/profile'>
-            <p>プロフィール</p>
-          </Link>
+          <ConnectWallet />
         </li>
         <li>
-          <ConnectWallet />
+          <Link href='/applicant/profile'>
+            <button className='btn w-full'>プロフィール</button>
+          </Link>
         </li>
       </ul>
     </div>
