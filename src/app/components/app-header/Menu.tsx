@@ -10,6 +10,15 @@ export default function Menu() {
           title-small rounded-l-full
         '
       >
+        <h3>ユーザ</h3>
+      </Link>
+      <Link
+        href='/applicant/apply-for'
+        className='
+          btn md:w-32
+          title-small rounded-none
+        '
+      >
         <h3>応募</h3>
       </Link>
       <Link

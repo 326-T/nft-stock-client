@@ -1,5 +1,6 @@
 export interface Applicant {
   id: string
+  uuid: string
   firstName: string
   lastName: string
   email: string
@@ -10,17 +11,19 @@ export interface Applicant {
 
 export interface ApplicantRequest {
   id: string
+  uuid: string
   firstName: string
   lastName: string
   email: string
   phone: string
   address: string
-  password: string
+  password?: string
   metamaskAddress: string
 }
 
 export const applicantRequestInit = {
   id: '',
+  uuid: '',
   firstName: '',
   lastName: '',
   email: '',
