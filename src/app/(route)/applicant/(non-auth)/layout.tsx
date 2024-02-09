@@ -1,5 +1,3 @@
-import ClientOnly from '@/components/ClientOnly'
-import Loading from '@/components/Loading'
 import AppHeader from '@/components/app-header/AppHeader'
 
 export const metadata = {
@@ -9,12 +7,11 @@ export const metadata = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <ClientOnly>
-      <Loading />
+    <>
       <div className='sticky top-0'>
         <AppHeader disableMenu />
       </div>
       {children}
-    </ClientOnly>
+    </>
   )
 }

@@ -13,19 +13,21 @@ export default function EntryForm() {
   const [resumeRequest, setResumeRequest] = useState<ResumeRequest>(resumeRequestInit)
   const [price, setPrice] = useState<number>(0)
   const [isFirstPost, setIsFirstPost] = useState<boolean>(true)
-  const contract = useReverseRecruitContract()
+  const { issueRecruitRight, isReady } = useReverseRecruitContract()
 
-  const postResumeRequest = () => {
+  const postResumeRequest = async () => {
     if (isFirstPost) {
-      postResume(resumeRequest)
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err))
+      Promise.all([
+        postResume(resumeRequest)
+          .then((res) => setIsFirstPost(false))
+          .catch((err) => console.log(err)),
+        issueRecruitRight(price)
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err)),
+      ])
+      return
     }
     patchResume(resumeRequest)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err))
-    contract
-      .issueRecruitRight(price)
       .then((res) => console.log(res))
       .catch((err) => console.log(err))
   }
@@ -127,8 +129,9 @@ export default function EntryForm() {
             w-full md:w-1/5
           '
           onClick={postResumeRequest}
+          disabled={isFirstPost && !isReady}
         >
-          <p className='title-small'>募集開始</p>
+          <p className='title-small'>{isFirstPost ? '募集開始' : '履歴書更新'}</p>
         </button>
       </div>
     </div>
