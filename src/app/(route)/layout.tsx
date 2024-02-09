@@ -4,21 +4,25 @@ import { EnvContext } from '@/contexts/EnvContext'
 import { ThirdwebProvider, metamaskWallet } from '@thirdweb-dev/react'
 import { Sepolia } from '@thirdweb-dev/chains'
 import { useContext } from 'react'
+import ClientOnly from '@/components/ClientOnly'
+import Loading from '@/components/Loading'
+import { Web3Provider } from '@/contexts/Web3Context'
+import DrawerRight from '@/components/drawer/DrawerRIght'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const envContext = useContext(EnvContext)
-  const customChain = {
-    ...Sepolia,
-    chainId: 11155111,
-    rpc: [envContext.apiKey],
-  }
 
   return (
-    <ThirdwebProvider
-      supportedWallets={[metamaskWallet({ recommended: true })]}
-      activeChain={customChain}
-    >
-      {children}
-    </ThirdwebProvider>
+    <ClientOnly>
+      <Loading />
+      <DrawerRight />
+      <ThirdwebProvider
+        supportedWallets={[metamaskWallet({ recommended: true })]}
+        activeChain={Sepolia}
+        clientId={envContext.apiKey}
+      >
+        <Web3Provider>{children}</Web3Provider>
+      </ThirdwebProvider>
+    </ClientOnly>
   )
 }

@@ -1,4 +1,4 @@
-import EntryForm from './components/entry-form/EntryForm'
+import EntryForm from './components/EntryForm'
 
 export default function ExhibitionPage() {
   return <EntryForm />

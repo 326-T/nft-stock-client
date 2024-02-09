@@ -1,7 +1,10 @@
+'use client'
+
+import { ConnectWallet } from '@thirdweb-dev/react'
 import { FaUndoAlt } from 'react-icons/fa'
-import UserIcon from './UserIcon'
 import MenuCompany from './MenuCompany'
 import Link from 'next/link'
+import UserIcon from './UserIcon'
 
 export default function AppHeaderCompany({ disableMenu }: { disableMenu?: boolean }) {
   return (

@@ -5,6 +5,7 @@ import { AuthContext } from '@/contexts/AuthContext'
 import { useContext } from 'react'
 import { FaCircleUser } from 'react-icons/fa6'
 import { IoMenu } from 'react-icons/io5'
+import Link from 'next/link'
 
 export default function UserIcon() {
   const authContext = useContext(AuthContext)
@@ -25,6 +26,7 @@ export default function UserIcon() {
       <ul
         tabIndex={0}
         className='
+          block
           dropdown-content
           z-[1] p-5
           space-y-3
@@ -34,13 +36,12 @@ export default function UserIcon() {
         '
       >
         <li>
-          <a>{authContext.company?.name}</a>
-        </li>
-        <li>
-          <a>{authContext.company?.email}</a>
-        </li>
-        <li>
           <ConnectWallet />
+        </li>
+        <li>
+          <Link href='/company/profile'>
+            <button className='btn w-full'>プロフィール</button>
+          </Link>
         </li>
       </ul>
     </div>

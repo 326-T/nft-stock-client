@@ -5,6 +5,7 @@ import { LoadingProvider } from './contexts/LoadingContext'
 import { AxiosProvider } from './contexts/AxiosContext'
 import { AuthProvider } from './contexts/AuthContext'
 import { EnvProvider } from './contexts/EnvContext'
+import { DrawerProvider } from './contexts/DrawerContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,11 +23,13 @@ export default function RootLayout({
     <html lang='jp'>
       <body className={inter.className}>
         <LoadingProvider>
-          <EnvProvider>
-            <AxiosProvider>
-              <AuthProvider>{children}</AuthProvider>
-            </AxiosProvider>
-          </EnvProvider>
+          <DrawerProvider>
+            <EnvProvider>
+              <AxiosProvider>
+                <AuthProvider>{children}</AuthProvider>
+              </AxiosProvider>
+            </EnvProvider>
+          </DrawerProvider>
         </LoadingProvider>
       </body>
     </html>
