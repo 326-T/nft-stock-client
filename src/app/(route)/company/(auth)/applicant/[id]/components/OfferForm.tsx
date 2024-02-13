@@ -3,6 +3,7 @@
 import Input from '@/components/Input'
 import TextArea from '@/components/TextArea'
 import { findOffersByResumeUuid, postOffer } from '@/services/offerApi'
+import { useReverseRecruitContract } from '@/hooks/useReverseRecruitContract'
 import { Offer, OfferRequest, offerRequestInit } from '@/types/offer'
 import { UUID } from 'crypto'
 import { useEffect, useMemo, useState } from 'react'
@@ -10,6 +11,7 @@ import { useEffect, useMemo, useState } from 'react'
 export default function OfferForm({ resumeUuid }: { resumeUuid: UUID }) {
   const [offer, setOffer] = useState<OfferRequest>({ ...offerRequestInit, resumeUuid: resumeUuid })
   const [offers, setOffers] = useState<Offer[]>([])
+  const { makeOffer } = useReverseRecruitContract()
 
   const currentHolder = useMemo(() => offers.findLast((offer) => offer.statusId === 1), [offers])
   const disabled = useMemo(() => {
@@ -23,6 +25,7 @@ export default function OfferForm({ resumeUuid }: { resumeUuid: UUID }) {
   }, [currentHolder, offer.price])
 
   const handleOffer = () => {
+    makeOffer('1', offer.price) //TODO:トークンID一旦固定を修正したい
     postOffer(offer)
   }
 
