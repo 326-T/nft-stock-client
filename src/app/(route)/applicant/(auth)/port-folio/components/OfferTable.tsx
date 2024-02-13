@@ -75,7 +75,7 @@ export default function OfferTable({
             <td className='w-52'>
               {offers[index].status === 'PENDING' ? (
                 <div className='flex'>
-                  <button onClick={() => {acceptOffer(row.uuid);acceptOfferContract('0');}} className='btn w-24 rounded-l-full'>
+                  <button onClick={() => {acceptOffer(row.uuid);acceptOfferContract('2');}} className='btn w-24 rounded-l-full'>
                     <p className='title-small'>了承する</p>
                   </button>
                   <button onClick={() => rejectOffer(row.uuid)} className='btn w-24 rounded-r-full'>

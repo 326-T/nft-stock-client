@@ -12,10 +12,10 @@ export const useReverseRecruitContract = () => {
   const { mutateAsync: acceptOfferMutate } = useContractWrite(contract, 'acceptOffer')
   const { mutateAsync: burnMutate } = useContractWrite(contract, 'burn')
 
-  const issueRecruitRight = async (price: number) => {
+  const issueRecruitRight = async (price: number, uuid: string) => {
     if (!isReady) return
     const _price = ethers.utils.parseUnits(price.toString(), 'ether')
-    issueRecruitRightMutate({ args: [_price] })
+    issueRecruitRightMutate({ args: [_price, uuid] })
   }
 
   const makeOffer = async (token: string, price: number) => {

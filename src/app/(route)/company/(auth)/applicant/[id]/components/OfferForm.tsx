@@ -25,7 +25,7 @@ export default function OfferForm({ resumeUuid }: { resumeUuid: UUID }) {
   }, [currentHolder, offer.price])
 
   const handleOffer = () => {
-    makeOffer('1', offer.price) //TODO:トークンID一旦固定を修正したい
+    makeOffer('2', offer.price) //TODO:トークンID一旦固定を修正したい
     postOffer(offer)
   }
 

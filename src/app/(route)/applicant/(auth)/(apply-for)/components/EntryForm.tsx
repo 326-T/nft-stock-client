@@ -8,6 +8,7 @@ import { useReverseRecruitContract } from '@/hooks/useReverseRecruitContract'
 import Input from '@/components/Input'
 import { Web3Context } from '@/contexts/Web3Context'
 import PassportPhoto from '@/components/entry-form/PassportPhoto'
+import { AuthContext } from '@/contexts/AuthContext'
 
 export default function EntryForm() {
   const [resumeRequest, setResumeRequest] = useState<ResumeRequest>(resumeRequestInit)
@@ -15,6 +16,7 @@ export default function EntryForm() {
   const [isFirstPost, setIsFirstPost] = useState<boolean>(true)
   const { issueRecruitRight } = useReverseRecruitContract()
   const { isReady } = useContext(Web3Context)
+  const authContext = useContext(AuthContext)
 
   const postResumeRequest = async () => {
     if (isFirstPost) {
@@ -22,7 +24,7 @@ export default function EntryForm() {
         postResume(resumeRequest)
           .then((res) => setIsFirstPost(false))
           .catch((err) => console.log(err)),
-        issueRecruitRight(price)
+        issueRecruitRight(price, authContext.applicant.uuid)
           .then((res) => console.log(res))
           .catch((err) => console.log(err)),
       ])
