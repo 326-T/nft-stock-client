@@ -19,6 +19,7 @@ export default function Page() {
 
   return (
     <ResponsiveContainer>
+      <div className='p-5' />
       {resume && <PortFolioContainer resumeUuid={resume.uuid} />}
     </ResponsiveContainer>
   )
