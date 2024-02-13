@@ -1,9 +1,9 @@
 'use client'
 
 import ResponsiveContainer from '@/components/ResponsiveContainer'
-import PortFolioContainer from '@/components/applicant-port-folio/PortFolioContainer'
 import { UUID } from 'crypto'
 import { useParams } from 'next/navigation'
+import PortFolioContainer from './components/PortFolioContainer'
 import ApplicantResume from './components/ApplicantResume'
 import OfferForm from './components/OfferForm'
 
