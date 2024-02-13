@@ -1,11 +1,13 @@
 import { Resume, ResumeRequest } from '@/types/resume'
 import axios, { AxiosPromise } from 'axios'
+import { UUID } from 'crypto'
 
 export const fetchResumes = (): AxiosPromise<Resume[]> => axios.get('/api/v1/resumes')
 
 export const getMine = (): AxiosPromise<Resume[]> => axios.get('/api/v1/resumes/applicant')
 
-export const findById = (id: string): AxiosPromise<Resume> => axios.get(`/api/v1/resumes/${id}`)
+export const findResumeByUuid = (uuid: UUID): AxiosPromise<Resume> =>
+  axios.get(`/api/v1/resumes/${uuid}`)
 
 export const postResume = (body: ResumeRequest): AxiosPromise<Resume> =>
   axios.post('/api/v1/resumes', body)

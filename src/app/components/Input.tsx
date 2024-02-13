@@ -2,12 +2,14 @@ export default function Input({
   value,
   setValue,
   label,
+  warn,
   type,
   step,
 }: {
   value: string
   setValue: (value: string) => void
   label?: string
+  warn?: string
   type?: string
   step?: string
 }) {
@@ -16,6 +18,7 @@ export default function Input({
       {label && (
         <div className='label'>
           <span className='label-text'>{label}</span>
+          <span className='label-text-alt text-red-400'>{warn}</span>
         </div>
       )}
       <input

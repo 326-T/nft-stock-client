@@ -4,11 +4,10 @@ import { ResumeRequest, resumeRequestInit } from '@/types/resume'
 import { useContext, useEffect, useState } from 'react'
 import TextArea from '@/components/TextArea'
 import { getMine, patchResume, postResume } from '@/services/resumeApi'
-import Image from 'next/image'
-import { PiUserSquareDuotone } from 'react-icons/pi'
 import { useReverseRecruitContract } from '@/hooks/useReverseRecruitContract'
 import Input from '@/components/Input'
 import { Web3Context } from '@/contexts/Web3Context'
+import PassportPhoto from '@/components/entry-form/PassportPhoto'
 
 export default function EntryForm() {
   const [resumeRequest, setResumeRequest] = useState<ResumeRequest>(resumeRequestInit)
@@ -53,28 +52,7 @@ export default function EntryForm() {
             space-y-5 md:space-y-10
           '
         >
-          <div className='flex w-full justify-center'>
-            {resumeRequest.picture ? (
-              <Image
-                src={resumeRequest.picture}
-                alt={''}
-                width={0}
-                height={0}
-                sizes='100vw'
-                style={{ width: '100%', height: 'auto' }}
-              />
-            ) : (
-              <PiUserSquareDuotone
-                width={0}
-                height={0}
-                size='100vw'
-                style={{ width: '100%', height: 'auto' }}
-              />
-            )}
-          </div>
-          <div className='flex justify-center'>
-            <input type='file' className='file-input w-full max-w-xs' />
-          </div>
+          <PassportPhoto url={resumeRequest.picture} onUpload={() => {}} />
           <Input
             label='希望金額'
             value={price.toString()}
