@@ -3,6 +3,7 @@
 import SortButton, { SortState } from '@/components/table/SortButton'
 import { useListItem } from '@/hooks/useListItem'
 import { acceptOffer, rejectOffer } from '@/services/offerApi'
+import { useReverseRecruitContract } from '@/hooks/useReverseRecruitContract'
 import { Offer } from '@/types/offer'
 import { decodeDate } from '@/utils/dateUtil'
 import { UUID } from 'crypto'
@@ -17,6 +18,7 @@ export default function OfferTable({
   onAccept: (offerId: UUID) => void
   onReject: (offerId: UUID) => void
 }) {
+  const { acceptOfferContract } = useReverseRecruitContract()  //TODO:オファーID一旦固定を修正したい
   const headers = ['会社名', '価格', '更新日', 'ステータス']
   const sortKeys = ['companyName', 'price', 'updatedAt', 'status']
   const sortCondition = useListItem<SortState>(sortKeys.map(() => 'NONE'))
@@ -73,7 +75,7 @@ export default function OfferTable({
             <td className='w-52'>
               {offers[index].status === 'PENDING' ? (
                 <div className='flex'>
-                  <button onClick={() => acceptOffer(row.uuid)} className='btn w-24 rounded-l-full'>
+                  <button onClick={() => {acceptOffer(row.uuid);acceptOfferContract('0');}} className='btn w-24 rounded-l-full'>
                     <p className='title-small'>了承する</p>
                   </button>
                   <button onClick={() => rejectOffer(row.uuid)} className='btn w-24 rounded-r-full'>

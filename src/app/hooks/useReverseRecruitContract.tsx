@@ -9,6 +9,7 @@ export const useReverseRecruitContract = () => {
   const { contract, isReady } = useContext(Web3Context)
   const { mutateAsync: issueRecruitRightMutate } = useContractWrite(contract, 'issueRecruitRight')
   const { mutateAsync: makeOfferMutate } = useContractWrite(contract, 'makeOffer')
+  const { mutateAsync: acceptOfferMutate } = useContractWrite(contract, 'acceptOffer')
   const { mutateAsync: burnMutate } = useContractWrite(contract, 'burn')
 
   const issueRecruitRight = async (price: number) => {
@@ -23,10 +24,15 @@ export const useReverseRecruitContract = () => {
     makeOfferMutate({ args: [Number(token), _price] })
   }
 
+  const acceptOfferContract = async (offer: string) => {
+    if (!isReady) return
+    acceptOfferMutate({ args: [Number(offer)] })
+  }
+
   const burn = async (token: string) => {
     if (!isReady) return
     burnMutate({ args: [Number(token)] })
   }
 
-  return { issueRecruitRight, makeOffer, burn, contract }
+  return { issueRecruitRight, makeOffer, acceptOfferContract, burn, contract }
 }
