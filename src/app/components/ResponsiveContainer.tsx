@@ -6,7 +6,6 @@ export default function ResponsiveContainer({ children }: { children: React.Reac
         md:p-10
         lg:px-20
         xl:px-32
-        2xl:px-52
       '
     >
       {children}
