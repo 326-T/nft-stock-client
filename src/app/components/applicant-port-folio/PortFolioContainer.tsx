@@ -16,7 +16,9 @@ export default function PortFolioContainer({ resumeUuid }: { resumeUuid: UUID })
       setOffers(res.data)
     })
   }, [resumeUuid])
-  return (
+  return offers.length === 0 ? (
+    <h1>まだオファーがありません。</h1>
+  ) : (
     <div className='block space-y-10'>
       <div className='flex w-full space-y-10'>
         <PriceChart offers={offers} />

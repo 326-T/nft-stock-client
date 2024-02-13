@@ -26,9 +26,7 @@ export default function PriceChart({ offers }: { offers: Offer[] }) {
     [offers],
   )
 
-  return accepted.length === 0 ? (
-    <div>応募がありません</div>
-  ) : (
+  return (
     <ResponsiveContainer width='100%' aspect={3 / 1}>
       <LineChart
         width={500}
