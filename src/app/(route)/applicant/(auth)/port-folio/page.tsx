@@ -1,10 +1,10 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import ResponsiveContainer from '@/components/ResponsiveContainer'
-import PortFolioContainer from '@/components/applicant-port-folio/PortFolioContainer'
 import { getMine } from '@/services/resumeApi'
 import { Resume } from '@/types/resume'
-import { useEffect, useState } from 'react'
+import PortFolioContainer from './components/PortFolioContainer'
 
 export default function Page() {
   const [resume, setResume] = useState<Resume | undefined>(undefined)
