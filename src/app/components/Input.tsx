@@ -5,6 +5,7 @@ export default function Input({
   warn,
   type,
   step,
+  disabled,
 }: {
   value: string
   setValue: (value: string) => void
@@ -12,6 +13,7 @@ export default function Input({
   warn?: string
   type?: string
   step?: string
+  disabled?: boolean
 }) {
   return (
     <label className='form-control'>
@@ -27,6 +29,7 @@ export default function Input({
         value={value}
         type={type ? type : 'text'}
         step={step}
+        disabled={disabled}
       />
     </label>
   )

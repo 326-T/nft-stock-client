@@ -10,6 +10,9 @@ export interface Resume {
   interests: string
   urls: string
   picture: string
+  mintStatus: string
+  mintStatusId: number
+  minimumPrice: number
   createdAt: Date
   updatedAt: Date
   version: number
@@ -25,6 +28,9 @@ export interface ResumeRequest {
   interests: string
   urls: string
   picture: string
+  mintStatus: string
+  mintStatusId: number
+  minimumPrice: number
 }
 
 export const resumeRequestInit = {
@@ -37,4 +43,7 @@ export const resumeRequestInit = {
   interests: '',
   urls: '',
   picture: '',
+  mintStatus: '',
+  mintStatusId: 0,
+  minimumPrice: 0,
 }
