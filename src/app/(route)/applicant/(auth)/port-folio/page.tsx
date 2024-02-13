@@ -1,16 +1,13 @@
 'use client'
 
 import ResponsiveContainer from '@/components/ResponsiveContainer'
-import PortFolioContainer from './components/PortFolioContainer'
-import { useEffect, useState } from 'react'
-import { findOffersByResumeUuid } from '@/services/offerApi'
-import { Resume } from '@/types/resume'
+import PortFolioContainer from '@/components/applicant-port-folio/PortFolioContainer'
 import { getMine } from '@/services/resumeApi'
-import { Offer } from '@/types/offer'
+import { Resume } from '@/types/resume'
+import { useEffect, useState } from 'react'
 
 export default function Page() {
   const [resume, setResume] = useState<Resume | undefined>(undefined)
-  const [offers, setOffers] = useState<Offer[]>([])
 
   useEffect(() => {
     getMine().then((res) => {
@@ -20,16 +17,9 @@ export default function Page() {
     })
   }, [])
 
-  useEffect(() => {
-    if (!resume) return
-    findOffersByResumeUuid(resume.uuid).then((res) => {
-      setOffers(res.data)
-    })
-  }, [resume])
-
   return (
     <ResponsiveContainer>
-      <PortFolioContainer offers={offers} />
+      {resume && <PortFolioContainer resumeUuid={resume.uuid} />}
     </ResponsiveContainer>
   )
 }

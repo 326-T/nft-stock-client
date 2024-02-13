@@ -17,8 +17,8 @@ export interface Offer {
 export interface OfferRequest {
   id: string
   uuid: UUID | undefined
-  resumeUuid: UUID
-  companyUuid: UUID
+  resumeUuid: UUID | undefined
+  companyUuid: UUID | undefined
   companyName: string
   price: number
   message: string
@@ -31,8 +31,8 @@ export interface OfferRequest {
 export const offerRequestInit = {
   id: '',
   uuid: undefined,
-  resumeUuid: '',
-  companyUuid: '',
+  resumeUuid: undefined,
+  companyUuid: undefined,
   companyName: '',
   price: 0,
   message: '',

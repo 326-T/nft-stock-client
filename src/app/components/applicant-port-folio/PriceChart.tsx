@@ -12,7 +12,7 @@ import {
 } from 'recharts'
 import { Offer } from '@/types/offer'
 import { decodeDate } from '@/utils/dateUtil'
-import { useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 
 export default function PriceChart({ offers }: { offers: Offer[] }) {
   const accepted = useMemo(
@@ -25,10 +25,6 @@ export default function PriceChart({ offers }: { offers: Offer[] }) {
         })),
     [offers],
   )
-
-  useEffect(() => {
-    console.log('accepted', accepted)
-  }, [accepted])
 
   return accepted.length === 0 ? (
     <div>応募がありません</div>

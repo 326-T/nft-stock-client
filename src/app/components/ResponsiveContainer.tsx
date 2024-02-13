@@ -2,8 +2,8 @@ export default function ResponsiveContainer({ children }: { children: React.Reac
   return (
     <div
       className='
-        w-full py-5 px-5
-        md:p-10
+        w-full px-5
+        md:px-10
         lg:px-20
         xl:px-32
       '
