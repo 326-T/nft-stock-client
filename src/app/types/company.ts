@@ -1,6 +1,8 @@
+import { UUID } from 'crypto'
+
 export interface Company {
   id: string
-  uuid: string
+  uuid: UUID
   name: string
   email: string
   phone: string
@@ -10,7 +12,7 @@ export interface Company {
 
 export interface CompanyRequest {
   id: string
-  uuid: string
+  uuid: UUID
   name: string
   email: string
   phone: string
@@ -21,7 +23,7 @@ export interface CompanyRequest {
 
 export const companyRequestInit = {
   id: '',
-  uuid: '',
+  uuid: undefined,
   name: '',
   email: '',
   phone: '',

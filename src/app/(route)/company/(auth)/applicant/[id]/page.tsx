@@ -26,7 +26,7 @@ export default function Page() {
         <div className='space-y-10'>
           {resume.mintStatusId === 1 && (
             <StickyHeader>
-              <OfferForm resumeUuid={params.id as UUID} />
+              <OfferForm resume={resume} />
             </StickyHeader>
           )}
           <MintStatusBadge mintStatusId={resume.mintStatusId} />

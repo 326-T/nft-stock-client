@@ -3,35 +3,45 @@
 import Input from '@/components/Input'
 import TextArea from '@/components/TextArea'
 import PrimaryButton from '@/components/button/PrimaryButton'
+import { AuthContext } from '@/contexts/AuthContext'
+import { useReverseRecruitContract } from '@/hooks/useReverseRecruitContract'
 import { findOffersByResumeUuid, postOffer } from '@/services/offerApi'
 import { Offer, OfferRequest, offerRequestInit } from '@/types/offer'
-import { UUID } from 'crypto'
-import { useEffect, useMemo, useState } from 'react'
+import { Resume } from '@/types/resume'
+import { useContext, useEffect, useMemo, useState } from 'react'
 
-export default function OfferForm({ resumeUuid }: { resumeUuid: UUID }) {
-  const [offer, setOffer] = useState<OfferRequest>({ ...offerRequestInit, resumeUuid: resumeUuid })
+export default function OfferForm({ resume }: { resume: Resume }) {
+  const [offer, setOffer] = useState<OfferRequest>({ ...offerRequestInit, resumeUuid: resume.uuid })
   const [offers, setOffers] = useState<Offer[]>([])
+  const { makeOffer } = useReverseRecruitContract()
+  const { company } = useContext(AuthContext)
 
-  const currentHolder = useMemo(() => offers.findLast((offer) => offer.statusId === 1), [offers])
+  const currentHolder = useMemo(() => {
+    const current = offers.findLast((offer) => offer.statusId === 1)
+    return current ? current : offerRequestInit
+  }, [offers])
   const disabled = useMemo(() => {
-    return currentHolder && offer.price < currentHolder.price
+    return offer.price < currentHolder.price || offer.price < resume.minimumPrice
   }, [offer])
   const warnText = useMemo(() => {
-    if (currentHolder && offer.price < currentHolder.price) {
-      return `※ ${currentHolder.price}ETHより高い金額`
+    const border =
+      currentHolder.price < resume.minimumPrice ? resume.minimumPrice : currentHolder.price
+    if (offer.price < border) {
+      return `※ ${border}ETHより高い金額`
     }
     return undefined
   }, [currentHolder, offer.price])
 
   const handleOffer = () => {
-    postOffer(offer)
+    if (offer.resumeUuid === undefined || company === undefined) return
+    makeOffer(offer.resumeUuid, company.uuid, offer.price).then(() => postOffer(offer))
   }
 
   useEffect(() => {
-    findOffersByResumeUuid(resumeUuid).then((res) => {
+    findOffersByResumeUuid(resume.uuid).then((res) => {
       setOffers(res.data)
     })
-  }, [resumeUuid])
+  }, [resume.uuid])
 
   return (
     <div
