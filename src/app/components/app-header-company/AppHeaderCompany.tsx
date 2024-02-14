@@ -1,10 +1,10 @@
 'use client'
 
-import { ConnectWallet } from '@thirdweb-dev/react'
 import { FaUndoAlt } from 'react-icons/fa'
 import MenuCompany from './MenuCompany'
 import Link from 'next/link'
 import UserIcon from './UserIcon'
+import ContractIcon from '../app-header/ContractIcon'
 
 export default function AppHeaderCompany({ disableMenu }: { disableMenu?: boolean }) {
   return (
@@ -28,7 +28,10 @@ export default function AppHeaderCompany({ disableMenu }: { disableMenu?: boolea
       {disableMenu || (
         <>
           <MenuCompany />
-          <UserIcon />
+          <div className='flex justify-center items-center space-x-5'>
+            <ContractIcon />
+            <UserIcon />
+          </div>
         </>
       )}
     </header>
