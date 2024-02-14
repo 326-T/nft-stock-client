@@ -1,19 +1,8 @@
-'use client'
-
 import TextArea from '@/components/TextArea'
 import PassportPhoto from '@/components/entry-form/PassportPhoto'
-import { findResumeByUuid } from '@/services/resumeApi'
 import { Resume } from '@/types/resume'
-import { UUID } from 'crypto'
-import { useEffect, useState } from 'react'
 
-export default function ApplicantResume({ resumeUuid }: { resumeUuid: UUID }) {
-  const [resume, setResume] = useState<Resume | undefined>(undefined)
-
-  useEffect(() => {
-    findResumeByUuid(resumeUuid).then((res) => setResume(res.data))
-  }, [])
-
+export default function ApplicantResume({ resume }: { resume: Resume }) {
   return (
     <>
       {resume && (
