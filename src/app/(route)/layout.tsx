@@ -8,6 +8,7 @@ import ClientOnly from '@/components/ClientOnly'
 import Loading from '@/components/Loading'
 import { Web3Provider } from '@/contexts/Web3Context'
 import DrawerRight from '@/components/drawer/DrawerRIght'
+import { ContractProvider } from '@/contexts/ContractContext'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const envContext = useContext(EnvContext)
@@ -21,7 +22,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         activeChain={Sepolia}
         clientId={envContext.apiKey}
       >
-        <Web3Provider>{children}</Web3Provider>
+        <Web3Provider>
+          <ContractProvider>{children}</ContractProvider>
+        </Web3Provider>
       </ThirdwebProvider>
     </ClientOnly>
   )
