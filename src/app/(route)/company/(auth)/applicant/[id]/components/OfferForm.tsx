@@ -2,6 +2,7 @@
 
 import Input from '@/components/Input'
 import TextArea from '@/components/TextArea'
+import PrimaryButton from '@/components/button/PrimaryButton'
 import { findOffersByResumeUuid, postOffer } from '@/services/offerApi'
 import { Offer, OfferRequest, offerRequestInit } from '@/types/offer'
 import { UUID } from 'crypto'
@@ -54,15 +55,7 @@ export default function OfferForm({ resumeUuid }: { resumeUuid: UUID }) {
         type='number'
         step='0.01'
       />
-      <button
-        onClick={handleOffer}
-        disabled={disabled}
-        className='
-          btn rounded-full
-        '
-      >
-        <p className='title-small'>オファーする</p>
-      </button>
+      <PrimaryButton onClick={handleOffer} disabled={disabled} label='オファーする' company />
     </div>
   )
 }

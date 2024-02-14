@@ -1,15 +1,9 @@
-'use client'
-
 import { ConnectWallet } from '@thirdweb-dev/react'
-import { AuthContext } from '@/contexts/AuthContext'
-import { useContext } from 'react'
 import { FaCircleUser } from 'react-icons/fa6'
 import { IoMenu } from 'react-icons/io5'
 import Link from 'next/link'
 
 export default function UserIcon() {
-  const authContext = useContext(AuthContext)
-
   return (
     <div className='dropdown dropdown-end'>
       <div tabIndex={0} role='button' className='btn rounded-full'>
@@ -28,7 +22,7 @@ export default function UserIcon() {
         className='
           block
           dropdown-content
-          z-[1] p-5
+          z-20 p-5
           space-y-3
           shadow bg-base-100 rounded-box w-52
           body-medium

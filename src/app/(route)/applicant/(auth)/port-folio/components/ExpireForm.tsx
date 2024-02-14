@@ -1,5 +1,6 @@
 'use client'
 
+import PrimaryButton from '@/components/button/PrimaryButton'
 import { expireResume } from '@/services/resumeApi'
 import { UUID } from 'crypto'
 
@@ -15,14 +16,7 @@ export default function ExpireForm({ resumeUuid }: { resumeUuid: UUID }) {
         space-x-10
       '
     >
-      <button
-        onClick={handleOffer}
-        className='
-          btn rounded-full
-        '
-      >
-        <p className='title-small'>NFTの移動を停止する</p>
-      </button>
+      <PrimaryButton onClick={handleOffer} label='NFTの移動を停止する' />
     </div>
   )
 }
