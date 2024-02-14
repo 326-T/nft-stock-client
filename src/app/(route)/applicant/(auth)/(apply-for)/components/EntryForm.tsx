@@ -1,9 +1,9 @@
 'use client'
 
 import { ResumeRequest, resumeRequestInit } from '@/types/resume'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import TextArea from '@/components/TextArea'
-import { getMine, patchResume, postResume } from '@/services/resumeApi'
+import { getMine, mintResume, patchResume, postResume } from '@/services/resumeApi'
 import { useReverseRecruitContract } from '@/hooks/useReverseRecruitContract'
 import Input from '@/components/Input'
 import { Web3Context } from '@/contexts/Web3Context'
@@ -11,33 +11,30 @@ import PassportPhoto from '@/components/entry-form/PassportPhoto'
 
 export default function EntryForm() {
   const [resumeRequest, setResumeRequest] = useState<ResumeRequest>(resumeRequestInit)
-  const [price, setPrice] = useState<number>(0)
-  const [isFirstPost, setIsFirstPost] = useState<boolean>(true)
   const { issueRecruitRight } = useReverseRecruitContract()
   const { isReady } = useContext(Web3Context)
 
   const postResumeRequest = async () => {
-    if (isFirstPost) {
-      Promise.all([
-        postResume(resumeRequest)
-          .then((res) => setIsFirstPost(false))
-          .catch((err) => console.log(err)),
-        issueRecruitRight(price)
-          .then((res) => console.log(res))
-          .catch((err) => console.log(err)),
-      ])
+    if (resumeRequest.id === undefined) {
+      postResume(resumeRequest).catch((err) => console.log(err))
       return
     }
-    patchResume(resumeRequest)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err))
+    patchResume(resumeRequest).catch((err) => console.log(err))
   }
+
+  const mintable = useMemo(
+    () =>
+      isReady &&
+      resumeRequest.uuid &&
+      resumeRequest.mintStatusId === 0 &&
+      resumeRequest.minimumPrice > 0,
+    [isReady, resumeRequest],
+  )
 
   useEffect(() => {
     getMine().then((res) => {
       if (res.data[0]) {
         setResumeRequest(res.data[0])
-        setIsFirstPost(false)
       }
     })
   }, [])
@@ -47,23 +44,44 @@ export default function EntryForm() {
       <div className='block md:flex justify-center w-full'>
         <div
           className='
-            w-full md:w-1/4
+            w-full md:w-1/3
             py-5 px-10 md:py-10
             space-y-5 md:space-y-10
           '
         >
           <PassportPhoto url={resumeRequest.picture} onUpload={() => {}} />
-          <Input
-            label='希望金額'
-            value={price.toString()}
-            setValue={(value) => setPrice(Number(value))}
-            type='number'
-            step='0.01'
-          />
+          <div className='flex items-end justify-between'>
+            <Input
+              label='希望金額'
+              value={resumeRequest.minimumPrice.toString()}
+              setValue={(value) =>
+                setResumeRequest((prev) => ({ ...prev, minimumPrice: Number(value) }))
+              }
+              type='number'
+              step='0.01'
+              disabled={resumeRequest.mintStatusId === 1}
+            />
+            <button
+              className='btn rounded-md'
+              onClick={() =>
+                mintable &&
+                issueRecruitRight(resumeRequest.minimumPrice).then(
+                  () =>
+                    resumeRequest.uuid &&
+                    mintResume(resumeRequest.uuid, resumeRequest.minimumPrice).then((res) =>
+                      setResumeRequest((prev) => ({ ...prev, mintStatusId: 1 })),
+                    ),
+                )
+              }
+              disabled={!mintable}
+            >
+              <p className='title-small'>発行</p>
+            </button>
+          </div>
         </div>
         <div
           className='
-            w-full md:w-2/4
+            w-full md:w-1/2
             py-5 px-10 md:py-10
             space-y-5 md:space-y-10
           '
@@ -109,9 +127,8 @@ export default function EntryForm() {
             w-full md:w-1/5
           '
           onClick={postResumeRequest}
-          disabled={isFirstPost && !isReady}
         >
-          <p className='title-small'>{isFirstPost ? '募集開始' : '履歴書更新'}</p>
+          <p className='title-small'>履歴書更新</p>
         </button>
       </div>
     </div>

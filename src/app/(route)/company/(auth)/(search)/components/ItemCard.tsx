@@ -2,6 +2,7 @@ import { Resume } from '@/types/resume'
 import Image from 'next/image'
 import Link from 'next/link'
 import { PiUserSquareDuotone } from 'react-icons/pi'
+import MintStatusBadge from './MintStatusBadge'
 export default function ItemCard({ resume }: { resume: Resume }) {
   return (
     <Link href={`/company/applicant/${resume.uuid}`}>
@@ -10,8 +11,10 @@ export default function ItemCard({ resume }: { resume: Resume }) {
         block
         w-96 h-96
         p-2
+        space-y-2
       '
       >
+        <MintStatusBadge mintStatusId={resume.mintStatusId} />
         <div className='flex w-full h-1/2 justify-center'>
           {resume.picture ? (
             <Image
