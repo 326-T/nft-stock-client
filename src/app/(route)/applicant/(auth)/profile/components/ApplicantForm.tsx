@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 import TextArea from '@/components/TextArea'
 import { getApplicant, patchApplicant } from '@/services/applicantApi'
 import { AuthContext } from '@/contexts/AuthContext'
+import PrimaryButton from '@/components/button/PrimaryButton'
 
 export default function ApplicantForm() {
   const authContext = useContext(AuthContext)
@@ -70,16 +71,7 @@ export default function ApplicantForm() {
           w-full
         '
       >
-        <button
-          className='
-            btn
-            rounded-none md:rounded-full
-            w-full md:w-1/5
-          '
-          onClick={patch}
-        >
-          <p className='title-small'>{'更新'}</p>
-        </button>
+        <PrimaryButton onClick={patch} label='更新' />
       </div>
     </div>
   )

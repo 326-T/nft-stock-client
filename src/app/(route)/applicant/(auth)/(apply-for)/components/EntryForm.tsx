@@ -8,6 +8,7 @@ import { useReverseRecruitContract } from '@/hooks/useReverseRecruitContract'
 import Input from '@/components/Input'
 import { Web3Context } from '@/contexts/Web3Context'
 import PassportPhoto from '@/components/entry-form/PassportPhoto'
+import PrimaryButton from '@/components/button/PrimaryButton'
 
 export default function EntryForm() {
   const [resumeRequest, setResumeRequest] = useState<ResumeRequest>(resumeRequestInit)
@@ -61,8 +62,7 @@ export default function EntryForm() {
               step='0.01'
               disabled={resumeRequest.mintStatusId === 1}
             />
-            <button
-              className='btn rounded-md'
+            <PrimaryButton
               onClick={() =>
                 mintable &&
                 issueRecruitRight(resumeRequest.minimumPrice).then(
@@ -73,10 +73,8 @@ export default function EntryForm() {
                     ),
                 )
               }
-              disabled={!mintable}
-            >
-              <p className='title-small'>発行</p>
-            </button>
+              label='発行'
+            />
           </div>
         </div>
         <div
@@ -120,16 +118,7 @@ export default function EntryForm() {
           w-full
         '
       >
-        <button
-          className='
-            btn
-            rounded-none md:rounded-full
-            w-full md:w-1/5
-          '
-          onClick={postResumeRequest}
-        >
-          <p className='title-small'>履歴書更新</p>
-        </button>
+        <PrimaryButton onClick={postResumeRequest} label='履歴書更新' />
       </div>
     </div>
   )

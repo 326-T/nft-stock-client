@@ -6,6 +6,7 @@ import Input from '@/components/Input'
 import { ApplicantRequest, applicantRequestInit } from '@/types/applicant'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import PrimaryButton from '@/components/button/PrimaryButton'
 
 export default function SignUpForm() {
   const [applicantRequest, setApplicantRequest] = useState<ApplicantRequest>(applicantRequestInit)
@@ -63,7 +64,7 @@ export default function SignUpForm() {
           />
           <Input
             label='パスワード'
-            value={applicantRequest.password}
+            value={applicantRequest.password === undefined ? '' : applicantRequest.password}
             setValue={(value) => setApplicantRequest((prev) => ({ ...prev, password: value }))}
             type='password'
           />
@@ -87,16 +88,7 @@ export default function SignUpForm() {
           w-full
         '
       >
-        <button
-          className='
-            btn
-            rounded-none md:rounded-full
-            w-full md:w-1/5
-          '
-          onClick={postApplicantRequest}
-        >
-          <p className='title-small'>登録</p>
-        </button>
+        <PrimaryButton onClick={postApplicantRequest} label='登録' />
       </div>
     </div>
   )

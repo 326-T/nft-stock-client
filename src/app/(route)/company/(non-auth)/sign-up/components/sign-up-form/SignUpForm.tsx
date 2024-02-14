@@ -6,6 +6,7 @@ import Input from '@/components/Input'
 import { CompanyRequest, companyRequestInit } from '@/types/company'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import PrimaryButton from '@/components/button/PrimaryButton'
 
 export default function SignUpForm() {
   const [companyRequest, setCompanyRequest] = useState<CompanyRequest>(companyRequestInit)
@@ -56,7 +57,7 @@ export default function SignUpForm() {
           />
           <Input
             label='パスワード'
-            value={companyRequest.password}
+            value={companyRequest.password === undefined ? '' : companyRequest.password}
             setValue={(value) => setCompanyRequest((prev) => ({ ...prev, password: value }))}
             type='password'
           />
@@ -80,16 +81,7 @@ export default function SignUpForm() {
           w-full
         '
       >
-        <button
-          className='
-            btn
-            rounded-none md:rounded-full
-            w-full md:w-1/5
-          '
-          onClick={postCompanyRequest}
-        >
-          <p className='title-small'>登録</p>
-        </button>
+        <PrimaryButton onClick={postCompanyRequest} label='登録' company />
       </div>
     </div>
   )

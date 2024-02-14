@@ -1,5 +1,6 @@
 'use client'
 
+import PrimaryButton from '@/components/button/PrimaryButton'
 import SortButton, { SortState } from '@/components/table/SortButton'
 import { useListItem } from '@/hooks/useListItem'
 import { acceptOffer, rejectOffer } from '@/services/offerApi'
@@ -72,14 +73,12 @@ export default function OfferTable({
             <td key={index}>{row.status}</td>
             <td className='w-52'>
               {offers[index].status === 'PENDING' ? (
-                <div className='flex'>
-                  <button onClick={() => acceptOffer(row.uuid)} className='btn w-24 rounded-l-full'>
-                    <p className='title-small'>了承する</p>
-                  </button>
-                  <button onClick={() => rejectOffer(row.uuid)} className='btn w-24 rounded-r-full'>
-                    <p className='title-small'>断る</p>
-                  </button>
-                </div>
+                <>
+                  <div className='flex'>
+                    <PrimaryButton onClick={() => onAccept(row.uuid)} label='了承する' />
+                    <PrimaryButton onClick={() => onReject(row.uuid)} label='断る' />
+                  </div>
+                </>
               ) : (
                 <></>
               )}
