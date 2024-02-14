@@ -13,6 +13,8 @@ export const useReverseRecruitContract = () => {
   const { findTokenByResumeUuid, findOfferByResumeUuidAndCompanyUuid } = useContext(ContractContext)
   const { mutateAsync: issueRecruitRightMutate } = useContractWrite(contract, 'issueRecruitRight')
   const { mutateAsync: makeOfferMutate } = useContractWrite(contract, 'makeOffer')
+  const { mutateAsync: acceptOfferMutate } = useContractWrite(contract, 'acceptOffer')
+  const { mutateAsync: buyRecruitRightsMutate } = useContractWrite(contract, 'buyRecruitRights')
   const { mutateAsync: burnMutate } = useContractWrite(contract, 'burn')
 
   const issueRecruitRight = async (price: number, resumeUuid: UUID) => {
@@ -21,12 +23,21 @@ export const useReverseRecruitContract = () => {
     return issueRecruitRightMutate({ args: [_price, resumeUuid] })
   }
 
-  const makeOffer = async (resumeUuid: UUID, companyUuid: UUID, price: number) => {
-    if (!isReady) return
+  const makeOffer = async (resumeUuid: UUID, companyUuid: UUID, price: number): Promise<any> => {
+    if (!isReady) return Promise.reject('not ready')
     const token: RecruitRight | undefined = findTokenByResumeUuid(resumeUuid)
-    if (!token) return
+    if (!token) return Promise.reject('token not found')
     const _price = ethers.utils.parseUnits(price.toString(), 'ether')
     return makeOfferMutate({ args: [token.tokenId, _price, companyUuid] })
+  }
+
+  const acceptOffer = async (resumeUuid: UUID, companyUuid: UUID): Promise<any> => {
+    if (!isReady) return Promise.reject('not ready')
+    const offer: Offer | undefined = findOfferByResumeUuidAndCompanyUuid(resumeUuid, companyUuid)
+    if (!offer) return Promise.reject('offer not found')
+    return acceptOfferMutate({ args: [offer.offerId] }).then(() =>
+      buyRecruitRightsMutate({ args: [offer.tokenId] }),
+    )
   }
 
   const burn = async (token: string) => {
@@ -34,5 +45,5 @@ export const useReverseRecruitContract = () => {
     burnMutate({ args: [Number(token)] })
   }
 
-  return { issueRecruitRight, makeOffer, burn, contract }
+  return { issueRecruitRight, makeOffer, acceptOffer, burn, contract }
 }

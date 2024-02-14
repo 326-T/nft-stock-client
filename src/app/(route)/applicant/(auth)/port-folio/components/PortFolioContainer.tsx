@@ -4,19 +4,28 @@ import { Offer } from '@/types/offer'
 import PriceChart from '@/components/applicant-port-folio/PriceChart'
 import CurrentHolder from '@/components/applicant-port-folio/CurrentHolder'
 import { useEffect, useState } from 'react'
-import { acceptOffer, findOffersByResumeUuid, rejectOffer } from '@/services/offerApi'
+import {
+  acceptOffer as acceptOfferApi,
+  findOffersByResumeUuid,
+  rejectOffer,
+} from '@/services/offerApi'
 import { UUID } from 'crypto'
 import OfferTable from './OfferTable'
+import { useReverseRecruitContract } from '@/hooks/useReverseRecruitContract'
 
 export default function PortFolioContainer({ resumeUuid }: { resumeUuid: UUID }) {
   const [offers, setOffers] = useState<Offer[]>([])
+  const { acceptOffer } = useReverseRecruitContract()
 
   const fetchOffers = async () =>
     findOffersByResumeUuid(resumeUuid).then((res) => {
       setOffers(res.data)
     })
-  const onAccept = async (offerId: UUID) => acceptOffer(offerId).then(() => fetchOffers())
-  const onReject = async (offerId: UUID) => rejectOffer(offerId).then(() => fetchOffers())
+  const onAccept = async (offer: Offer) =>
+    acceptOffer(offer.resumeUuid, offer.companyUuid).then(() =>
+      acceptOfferApi(offer.uuid).then(() => fetchOffers()),
+    )
+  const onReject = async (offer: Offer) => rejectOffer(offer.uuid).then(() => fetchOffers())
 
   useEffect(() => {
     fetchOffers()

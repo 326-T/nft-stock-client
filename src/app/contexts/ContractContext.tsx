@@ -30,7 +30,7 @@ export function ContractProvider({ children }: { children: React.ReactNode }) {
   const findOfferByResumeUuidAndCompanyUuid = (resumeUuid: UUID, companyUuid: UUID): Offer => {
     const token: RecruitRight = findTokenByResumeUuid(resumeUuid)
     return offers
-      .filter((offer: Offer) => offer.tokenId === token.tokenId)
+      .filter((offer: Offer) => token.tokenId.eq(offer.tokenId))
       .find((offer: Offer) => offer.companyId === companyUuid)
   }
 

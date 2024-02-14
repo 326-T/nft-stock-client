@@ -3,7 +3,6 @@
 import PrimaryButton from '@/components/button/PrimaryButton'
 import SortButton, { SortState } from '@/components/table/SortButton'
 import { useListItem } from '@/hooks/useListItem'
-import { acceptOffer, rejectOffer } from '@/services/offerApi'
 import { Offer } from '@/types/offer'
 import { decodeDate } from '@/utils/dateUtil'
 import { UUID } from 'crypto'
@@ -15,8 +14,8 @@ export default function OfferTable({
   onReject,
 }: {
   offers: Offer[]
-  onAccept: (offerId: UUID) => void
-  onReject: (offerId: UUID) => void
+  onAccept: (offer: Offer) => void
+  onReject: (offer: Offer) => void
 }) {
   const headers = ['会社名', '価格', '更新日', 'ステータス']
   const sortKeys = ['companyName', 'price', 'updatedAt', 'status']
@@ -66,17 +65,17 @@ export default function OfferTable({
       </thead>
       <tbody>
         {sorted.map((row: Offer, index: number) => (
-          <tr key={index} className='hover'>
-            <td key={index}>{row.companyName}</td>
-            <td key={index}>{row.price}</td>
-            <td key={index}>{decodeDate(row.updatedAt)}</td>
-            <td key={index}>{row.status}</td>
+          <tr key={row.uuid} className='hover'>
+            <td key='companyName'>{row.companyName}</td>
+            <td key='price'>{row.price}</td>
+            <td key='updatedAt'>{decodeDate(row.updatedAt)}</td>
+            <td key='status'>{row.status}</td>
             <td className='w-52'>
               {offers[index].status === 'PENDING' ? (
                 <>
                   <div className='flex'>
-                    <PrimaryButton onClick={() => onAccept(row.uuid)} label='了承する' />
-                    <PrimaryButton onClick={() => onReject(row.uuid)} label='断る' />
+                    <PrimaryButton onClick={() => onAccept(row)} label='了承する' />
+                    <PrimaryButton onClick={() => onReject(row)} label='断る' />
                   </div>
                 </>
               ) : (
