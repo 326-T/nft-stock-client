@@ -17,7 +17,7 @@ export default function OfferForm({ resume }: { resume: Resume }) {
   const { company } = useContext(AuthContext)
 
   const currentHolder = useMemo(() => {
-    const current = offers.findLast((offer) => offer.statusId === 1)
+    const current = offers.findLast((offer) => offer.statusId === 2)
     return current ? current : offerRequestInit
   }, [offers])
   const disabled = useMemo(() => {

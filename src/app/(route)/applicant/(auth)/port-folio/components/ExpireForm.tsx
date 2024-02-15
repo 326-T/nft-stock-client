@@ -1,12 +1,15 @@
 'use client'
 
 import PrimaryButton from '@/components/button/PrimaryButton'
+import { useReverseRecruitContract } from '@/hooks/useReverseRecruitContract'
 import { expireResume } from '@/services/resumeApi'
 import { UUID } from 'crypto'
 
 export default function ExpireForm({ resumeUuid }: { resumeUuid: UUID }) {
+  const { stopRecruitRights } = useReverseRecruitContract()
+
   const handleOffer = () => {
-    expireResume(resumeUuid)
+    stopRecruitRights(resumeUuid).then(() => expireResume(resumeUuid))
   }
 
   return (

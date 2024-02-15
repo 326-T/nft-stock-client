@@ -1,22 +1,10 @@
-'use client'
-
 import { Offer } from '@/types/offer'
 import PriceChart from '@/components/applicant-port-folio/PriceChart'
 import CurrentHolder from '@/components/applicant-port-folio/CurrentHolder'
-import { useEffect, useState } from 'react'
-import { findOffersByResumeUuid } from '@/services/offerApi'
-import { UUID } from 'crypto'
 import SortedTable from '@/components/table/SortedTable'
 import { decodeDate } from '@/utils/dateUtil'
 
-export default function PortFolioContainer({ resumeUuid }: { resumeUuid: UUID }) {
-  const [offers, setOffers] = useState<Offer[]>([])
-
-  useEffect(() => {
-    findOffersByResumeUuid(resumeUuid).then((res) => {
-      setOffers(res.data)
-    })
-  }, [resumeUuid])
+export default function PortFolioContainer({ offers }: { offers: Offer[] }) {
   return offers.length === 0 ? (
     <h1>まだオファーがありません。</h1>
   ) : (

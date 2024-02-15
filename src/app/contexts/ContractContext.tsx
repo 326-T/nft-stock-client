@@ -20,18 +20,18 @@ export const ContractContext = createContext<{
 
 export function ContractProvider({ children }: { children: React.ReactNode }) {
   const { contract, isReady } = useContext(Web3Context)
-  const { data: tokens, error: tokenErrors } = useContractRead(contract, 'getAllTokens')
+  const { data: tokens, error: tokenErrors } = useContractRead(contract, 'getValidTokens')
   const { data: offers, error: offerErrors } = useContractRead(contract, 'getAllOffers')
 
   const findTokenByResumeUuid = (resumeUuid: UUID): RecruitRight => {
-    return tokens.find((token: RecruitRight) => token.studentId === resumeUuid)
+    return tokens.findLast((token: RecruitRight) => token.studentId === resumeUuid)
   }
 
   const findOfferByResumeUuidAndCompanyUuid = (resumeUuid: UUID, companyUuid: UUID): Offer => {
     const token: RecruitRight = findTokenByResumeUuid(resumeUuid)
     return offers
       .filter((offer: Offer) => token.tokenId.eq(offer.tokenId))
-      .find((offer: Offer) => offer.companyId === companyUuid)
+      .findLast((offer: Offer) => offer.companyId === companyUuid)
   }
 
   return (

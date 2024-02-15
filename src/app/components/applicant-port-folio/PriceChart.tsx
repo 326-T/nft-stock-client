@@ -18,7 +18,7 @@ export default function PriceChart({ offers }: { offers: Offer[] }) {
   const accepted = useMemo(
     () =>
       offers
-        .filter((offer) => offer.statusId === 1)
+        .filter((offer) => offer.statusId === 2)
         .map((offer) => ({
           name: decodeDate(offer.updatedAt),
           ETH: offer.price,

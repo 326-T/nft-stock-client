@@ -5,17 +5,18 @@ import SortButton, { SortState } from '@/components/table/SortButton'
 import { useListItem } from '@/hooks/useListItem'
 import { Offer } from '@/types/offer'
 import { decodeDate } from '@/utils/dateUtil'
-import { UUID } from 'crypto'
 import { useMemo } from 'react'
 
 export default function OfferTable({
   offers,
   onAccept,
   onReject,
+  disableAction,
 }: {
   offers: Offer[]
   onAccept: (offer: Offer) => void
   onReject: (offer: Offer) => void
+  disableAction: boolean
 }) {
   const headers = ['会社名', '価格', '更新日', 'ステータス']
   const sortKeys = ['companyName', 'price', 'updatedAt', 'status']
@@ -71,10 +72,14 @@ export default function OfferTable({
             <td key='updatedAt'>{decodeDate(row.updatedAt)}</td>
             <td key='status'>{row.status}</td>
             <td className='w-52'>
-              {offers[index].status === 'PENDING' ? (
+              {offers[index].statusId === 0 ? (
                 <>
                   <div className='flex'>
-                    <PrimaryButton onClick={() => onAccept(row)} label='了承する' />
+                    <PrimaryButton
+                      onClick={() => onAccept(row)}
+                      label='了承する'
+                      disabled={disableAction}
+                    />
                     <PrimaryButton onClick={() => onReject(row)} label='断る' />
                   </div>
                 </>

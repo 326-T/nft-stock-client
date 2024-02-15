@@ -4,7 +4,7 @@ import { Offer } from '@/types/offer'
 import { useMemo } from 'react'
 
 export default function CurrentHolder({ offers }: { offers: Offer[] }) {
-  const currentHolder = useMemo(() => offers.findLast((offer) => offer.statusId === 1), [offers])
+  const currentHolder = useMemo(() => offers.findLast((offer) => offer.statusId === 2), [offers])
 
   return (
     <div className='block justify-end'>
