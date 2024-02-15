@@ -2,7 +2,8 @@
 
 const withPWA = require('next-pwa')({
   dest: 'public',
-  disable: process.env.NODE_ENV === 'development',
+  register: true,
+  skipWaiting: true,
   buildExcludes: [/middleware-manifest.json$/],
   runtimeCaching: [
     {
@@ -19,6 +20,4 @@ const withPWA = require('next-pwa')({
   ],
 })
 
-module.exports = withPWA({
-  reactStrictMode: false,
-})
+module.exports = withPWA({})

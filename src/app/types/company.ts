@@ -12,7 +12,7 @@ export interface Company {
 
 export interface CompanyRequest {
   id: string
-  uuid: UUID
+  uuid: UUID | undefined
   name: string
   email: string
   phone: string

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import ItemContainer from './components/ItemContainer'
 import { Resume } from '@/types/resume'
 import { fetchResumes } from '@/services/resumeApi'

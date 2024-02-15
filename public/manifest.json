@@ -4,8 +4,8 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "NEXT Application",
-  "short_name": "NEXT",
+  "name": "Reverse-cruit",
+  "short_name": "Re:cruit",
   "icons": [
     {
       "src": "/icons/icon-192x192.png",

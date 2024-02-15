@@ -21,6 +21,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='jp'>
+      <head>
+        <link rel='manifest' href='/manifest.json' />
+        <link rel='apple-touch-icon' href='/icons/icon.png' />
+        <meta name='theme-color' content='#2B3440' />
+      </head>
       <body className={inter.className}>
         <LoadingProvider>
           <DrawerProvider>
