@@ -8,6 +8,9 @@ export const findOffersByResumeUuid = (resumeUuid: UUID): AxiosPromise<Offer[]> 
 export const postOffer = (body: OfferRequest): AxiosPromise<Offer> =>
   axios.post('/api/v1/offers', body)
 
+export const expectPayment = (offerUuid: UUID): AxiosPromise<Offer> =>
+  axios.patch(`/api/v1/offers/${offerUuid}/payment`)
+
 export const acceptOffer = (offerUuid: UUID): AxiosPromise<Offer> =>
   axios.patch(`/api/v1/offers/${offerUuid}/accept`)
 

@@ -17,11 +17,26 @@ export default function EntryForm() {
 
   const postResumeRequest = async () => {
     if (resumeRequest.id === undefined) {
-      postResume(resumeRequest).catch((err) => console.log(err))
+      postResume(resumeRequest)
+        .then((res) => setResumeRequest(res.data))
+        .catch((err) => console.log(err))
       return
     }
-    patchResume(resumeRequest).catch((err) => console.log(err))
+    patchResume(resumeRequest)
+      .then((res) => setResumeRequest(res.data))
+      .catch((err) => console.log(err))
   }
+
+  const mint = async () =>
+    mintable &&
+    resumeRequest.uuid &&
+    issueRecruitRight(resumeRequest.minimumPrice, resumeRequest.uuid).then(
+      () =>
+        resumeRequest.uuid &&
+        mintResume(resumeRequest.uuid, resumeRequest.minimumPrice).then((res) =>
+          setResumeRequest((prev) => ({ ...prev, mintStatusId: 1 })),
+        ),
+    )
 
   const mintable = useMemo(
     () =>
@@ -62,19 +77,7 @@ export default function EntryForm() {
               step='0.01'
               disabled={resumeRequest.mintStatusId === 1}
             />
-            <PrimaryButton
-              onClick={() =>
-                mintable &&
-                issueRecruitRight(resumeRequest.minimumPrice).then(
-                  () =>
-                    resumeRequest.uuid &&
-                    mintResume(resumeRequest.uuid, resumeRequest.minimumPrice).then((res) =>
-                      setResumeRequest((prev) => ({ ...prev, mintStatusId: 1 })),
-                    ),
-                )
-              }
-              label='発行'
-            />
+            <PrimaryButton onClick={mint} label='発行' disabled={!mintable} />
           </div>
         </div>
         <div

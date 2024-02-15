@@ -12,8 +12,9 @@ export default function PrimaryButton({
   return (
     <button
       onClick={onClick}
+      disabled={disabled}
       className={`
-        btn min-w-24 rounded-2xl
+        btn min-w-24 rounded-lg
         text-white
         ${company ? 'bg-primary-company' : 'bg-primary-applicant'}
         ${company ? 'hover:bg-secondary-company' : 'hover:bg-secondary-applicant'}
