@@ -2,18 +2,25 @@ export default function Input({
   value,
   setValue,
   label,
+  warn,
   type,
+  step,
+  disabled,
 }: {
   value: string
   setValue: (value: string) => void
   label?: string
+  warn?: string
   type?: string
+  step?: string
+  disabled?: boolean
 }) {
   return (
     <label className='form-control'>
       {label && (
         <div className='label'>
           <span className='label-text'>{label}</span>
+          <span className='label-text-alt text-red-400'>{warn}</span>
         </div>
       )}
       <input
@@ -21,6 +28,8 @@ export default function Input({
         onChange={(e) => setValue(e.target.value)}
         value={value}
         type={type ? type : 'text'}
+        step={step}
+        disabled={disabled}
       />
     </label>
   )

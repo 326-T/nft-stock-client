@@ -1,7 +1,10 @@
-import { FaUndoAlt } from 'react-icons/fa'
-import UserIcon from './UserIcon'
+'use client'
+
 import Menu from './Menu'
 import Link from 'next/link'
+import UserIcon from './UserIcon'
+import ContractIcon from './ContractIcon'
+import Title from './Title'
 
 export default function AppHeader({ disableMenu }: { disableMenu?: boolean }) {
   return (
@@ -12,20 +15,16 @@ export default function AppHeader({ disableMenu }: { disableMenu?: boolean }) {
         bg-white border-b border-gray-200
       `}
     >
-      <Link
-        href='/applicant'
-        className='
-          flex space-x-5
-          items-center
-        '
-      >
-        <FaUndoAlt className='icon-large' />
-        <h1 className='title-large hidden md:block'>Reverse Cruit</h1>
+      <Link href='/applicant'>
+        <Title />
       </Link>
       {disableMenu || (
         <>
           <Menu />
-          <UserIcon />
+          <div className='flex justify-center items-center space-x-5'>
+            <ContractIcon />
+            <UserIcon />
+          </div>
         </>
       )}
     </header>

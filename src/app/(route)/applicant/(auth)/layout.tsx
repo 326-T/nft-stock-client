@@ -9,12 +9,11 @@ export const metadata = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <ClientOnly>
-      <Loading />
+    <>
       <div className='sticky top-0'>
         <AppHeader />
       </div>
       {children}
-    </ClientOnly>
+    </>
   )
 }

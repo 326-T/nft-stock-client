@@ -1,8 +1,11 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { LoadingProvider } from './contexts/LoadingProvider'
-import { AxiosProvider } from './contexts/AxiosProvider'
+import { LoadingProvider } from './contexts/LoadingContext'
+import { AxiosProvider } from './contexts/AxiosContext'
+import { AuthProvider } from './contexts/AuthContext'
+import { EnvProvider } from './contexts/EnvContext'
+import { DrawerProvider } from './contexts/DrawerContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,9 +21,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='jp'>
+      <head>
+        <link rel='manifest' href='/manifest.json' />
+        <link rel='apple-touch-icon' href='/icons/icon.png' />
+        <meta name='theme-color' content='#2B3440' />
+      </head>
       <body className={inter.className}>
         <LoadingProvider>
-          <AxiosProvider>{children}</AxiosProvider>
+          <DrawerProvider>
+            <EnvProvider>
+              <AxiosProvider>
+                <AuthProvider>{children}</AuthProvider>
+              </AxiosProvider>
+            </EnvProvider>
+          </DrawerProvider>
         </LoadingProvider>
       </body>
     </html>

@@ -8,9 +8,21 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      colors: {
+        // https://m2.material.io/inline-tools/color/
+        primary: {
+          company: '#facc15',
+          applicant: '#0891b2',
+        },
+        secondary: {
+          company: '#fde047',
+          applicant: '#22d3ee',
+        },
+        tertiary: {
+          company: '#fef08a',
+          applicant: '#67e8f9',
+        },
+        text: '#0F172A',
       },
     },
   },

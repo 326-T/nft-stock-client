@@ -73,6 +73,14 @@
   letter-spacing: 0.5px;
 }
 
+.title-large-emphasis {
+  @apply text-font;
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 34px;
+  letter-spacing: 0px;
+}
+
 .title-large {
   @apply text-font;
   font-weight: 700;
