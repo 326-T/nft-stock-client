@@ -4,7 +4,7 @@ FROM node:20.11.1 AS base
 FROM base AS deps
 WORKDIR /app
 COPY package.json yarn.lock ./
-RUN yarn
+RUN yarn install --frozen-lockfile --network-timeout 300000
 
 # Build
 FROM deps AS build
