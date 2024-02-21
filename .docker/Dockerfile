@@ -25,5 +25,5 @@ USER nonroot
 
 EXPOSE 3000
 
-ENTRYPOINT ["node"]
+ENTRYPOINT ["/nodejs/bin/node"]
 CMD ["server.js"]
