@@ -1,8 +1,7 @@
-FROM node:20.4-alpine as base
+FROM node:20.11.1 AS base
 
 # Install dependencies
 FROM base AS deps
-RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn
@@ -15,16 +14,14 @@ COPY . .
 RUN yarn build
 
 # Production
-FROM base AS runner
+FROM gcr.io/distroless/nodejs20-debian11:nonroot as runner
 WORKDIR /app
 ENV NODE_ENV production
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
 COPY --from=build /app/public ./public
-COPY --from=build --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=build --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=build --chown=nonroot:nonroot /app/.next/standalone ./
+COPY --from=build --chown=nonroot:nonroot /app/.next/static ./.next/static
 
-USER nextjs
+USER nonroot
 
 EXPOSE 3000
 
